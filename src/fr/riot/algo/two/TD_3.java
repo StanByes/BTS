@@ -7,7 +7,6 @@ public class TD_3 {
 		Scanner sc = new Scanner(System.in);
 		
 		// Ex 1
-		/*
 		int value = (int) (Math.random() * (100 - 1)) + 1;
 		
 		System.out.println("A vous de jouer !");
@@ -25,11 +24,8 @@ public class TD_3 {
 		}
 		
 		System.out.println("Bien joué ! La bonne valeur était " + value);
-		*/
-		
 		
 		// Ex 2
-		/*
 		System.out.println("Combien de notes voulez-vous entrer ?");
 		int count = sc.nextInt();
 		if (count < 1) {
@@ -55,47 +51,46 @@ public class TD_3 {
 				higherNotesCount++;
 		
 		System.out.println("Il y a " + higherNotesCount + " notes au-dessus de la moyenne");
-		*/
 		
 		// Challenge
 		int[] countTotal = new int[2];
 		while (countTotal[0] < 3 && countTotal[1] < 3) {
 			System.out.println("Veuillez entre la borne maximum");
 			int max = sc.nextInt();
-			int value = (int) (Math.random() * (max - 1)) + 1;
+			int randomValue = (int) (Math.random() * (max - 1)) + 1;
 			
-			int[] count = new int[2];
+			int[] countP = new int[2];
 			do {
 				for (int i = 0; i < 2; i++) {
 					System.out.println("Au joueur " + (i + 1) + " de jouer !");
 					System.out.println("Trouvez la valeur correcte :");
 					
-					int input = sc.nextInt();
+					int inputV = sc.nextInt();
 					int j = 1;
-					while (input != value) {
-						if (input > value)
+					while (inputV != randomValue) {
+						if (inputV > randomValue)
 							System.out.println("Plus petit !");
-						else if (input < value)
+						else if (inputV < randomValue)
 							System.out.println("Plus grand !");
 						
 						System.out.println("Entrez une nouvelle valeur :");
-						input = sc.nextInt();
+						inputV = sc.nextInt();
 						
 						j++;	
 					}
 					
-					count[i] = j;
+					countP[i] = j;
 				}
 				
-				if (count[0] == count[1]) {
+				if (countP[0] == countP[1]) {
 					System.out.println("Egalité ! On recommence la partie :");
-					value = (int) (Math.random() * (max - 1)) + 1;
+					randomValue = (int) (Math.random() * (max - 1)) + 1;
 				}
-			} while (count[0] == count[1]);
+			} while (countP[0] == countP[1]);
 			
-			System.out.println("Le joueur 1 a trouvé en " + count[0] + " coups");
-			System.out.println("Le joueur 2 a trouvé en " + count[1] + " coups");
-			if (count[0] < count[1])
+			System.out.println("Le joueur 1 a trouvé en " + countP[0] + " coups");
+			System.out.println("Le joueur 2 a trouvé en " + countP[1] + " coups");
+			if (countP[0] < countP[1])
 				countTotal[0] = countTotal[0] + 1;
 			else 
 				countTotal[1] = countTotal[1] + 1;
