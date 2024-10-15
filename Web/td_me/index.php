@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "OBJECT : $mailCategory $object";
     echo "<br>";
     echo "$genderName $name vous à envoyer un email en utilisant votre formulaire de contact.<br>$content";
-    mail($mail, "OBJECT : $mailCategory $object", "$genderName $name vous à envoyer un email en utilisant votre formulaire de contact.<br>$content");
+    mail("bastienriot2@gmail.com", "OBJECT : $mailCategory $object", "$genderName $name vous à envoyer un email en utilisant votre formulaire de contact.\n$content", "From: $mail");
 }
 
 ?>
