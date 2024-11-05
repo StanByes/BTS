@@ -18,7 +18,7 @@ input:not([type=radio]), select, textarea {
     box-shadow: 0px;
 }
 
-div:not(.form-group) {
+div:not(.form-group):not(.form-submit) {
     padding: 0 15px 0 15px;
 
     background-color: white;
