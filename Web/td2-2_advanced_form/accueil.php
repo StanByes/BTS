@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (strlen($_POST["password"]) < 10) {
-        echo "<span>Le mot de passe est trop court. Veuillez réessayer sur <a href='/'>cette page</a></span>";
+        echo "<span>Le mot de passe est trop court. Veuillez réessayer sur <a href='./index.php'>cette page</a></span>";
         return;
     }
 
@@ -30,11 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
     <head>
         <title>Confirmation</title>
+        <link rel="stylesheet" href="./assets/style.css">
     </head>
 
     <body>
-        <p>Bonjour <?= $genderName . " " . $_POST["name"] ?></p>
-        <p>Coût inscription : <?= $price ?></p>
-        <a href="confirmer.php"><button style="background-color: blue; padding: 1%; color: white;">Confirmer</button></a>
+        <div class="confirmation">
+            <h3>Bonjour <?= $genderName . " " . $_POST["name"] ?></h3>
+            <p>Coût inscription : <?= $price ?></p>
+            <a href="confirmer.php"><button>Confirmer</button></a>
+        </div>
     </body>
 </html>

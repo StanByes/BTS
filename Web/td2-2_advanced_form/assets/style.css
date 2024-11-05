@@ -18,7 +18,7 @@ input:not([type=radio]), select, textarea {
     box-shadow: 0px;
 }
 
-.form {
+div:not(.form-group) {
     padding: 0 15px 0 15px;
 
     background-color: white;
@@ -62,4 +62,20 @@ input:not([type=radio]), select, textarea {
 
 .form-group {
     margin-bottom: 4%;
+}
+
+.confirmation {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmation a {
+    margin: 5%;
+}
+
+.confirmation button {
+    padding: 5%;
+    width: 100%;
+    background-color: blue;
+    color: white;
 }
