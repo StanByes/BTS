@@ -3,21 +3,58 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>AP - Bastien RIOT</title>
+
+        <link rel="stylesheet" href="./assets/styles.css">
     </head>
 
-    <style>
-        h1 {
-            text-align: center;
-        }
-    </style>
-
     <body>
-        <h1>Mes Projets</h1>
+        <div>
+            <h1 class="title">Portfolio</h1>
+            <h2 class="name">Bastien RIOT</h2>
+        </div>
 
-        <ul>
-            <li><a href="./td1_guitar_doctor/index.html" target="_blank">TD1 - Guitar Doctor</a></li>
-            <li><a href="./td2_me/index.php" target="_blank">TD2 - Mon profil</a></li>
-            <li><a href="./td2-2_advanced_form/index.php" target="_blank">TD2.2 - Formulaire avancés</a></li>
-        </ul>
+        <main>
+            <p>Je suis Bastien RIOT | Apprenti développeur en BTS SIO option SLAM</p>
+            <button class="btn red">
+                <a href="#projects">Mes projets</a>
+            </button>
+        </main>
+
+        <hr>
+
+        <section class="projects" id="projects">
+            <div class="project">
+                <div class="header">
+                    <h4 class="float-start"><a href="./td1_guitar_doctor/index.html" target="_blank">Guitar Doctor</a></h4>
+                    <img src="./assets/images/project_guitar_doctor.webp">
+                </div>
+
+                <p>Envie d'une nouvelle guitare ou de réparation sur votre matériel ? Par ici !</p>
+            </div>
+            <div class="project">
+                <div class="header">
+                    <img src="./assets/images/project_me.webp">
+                    <h4 class="float-end"><a href="./td2_me/index.php" target="_blank">Formulaire de contact</a></h4>
+                </div>
+
+                <p class="float-end">Venez visitez ma page et me contacter !</p>
+            </div>
+            <div class="project">
+                <div class="header">
+                    <h4 class="float-start"><a href="./td2-2_advanced_form/index.php" target="_blank">Formulaire avancé</a></h4>
+                    <img src="./assets/images/project_advanced_form.webp">
+                </div>
+
+                <p>Souhaitez-vous adhérer à cette fausse association ? C'est par ici !</p>
+            </div>
+            <div class="project">
+                <div class="header">
+                    <img src="./assets/images/project_sfo.webp">
+                    <h4 class="float-end"><a href="./td4/index.php" target="_blank">Inscription/Connexion</a></h4>
+                </div>
+
+                <p class="float-end">Rejoignez dès maintenant Stackfindover !</p>
+            </div>
+        </section>
     </body>
 </html>
