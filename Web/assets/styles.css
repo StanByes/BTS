@@ -21,6 +21,10 @@ hr {
     margin-bottom: 4%;
 }
 
+p {
+    color: rgb(12 201 12);
+}
+
 .title {
     text-align: center;
     color: rgb(231, 158, 0);
@@ -50,10 +54,6 @@ main, section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-main p {
-    color: white;
 }
 
 .btn {
@@ -93,14 +93,12 @@ a {
 }
 
 .project h4 {
-    color: white;
     margin: 5px;
     margin-left: 30px;
     margin-right: 30px;
 }
 
 .project p {
-    color: white;
     margin: 5px;
 }
 
@@ -124,5 +122,6 @@ img {
 }
 
 .project a {
+    color: rgb(0, 199, 43);
     text-decoration: underline;
 }
