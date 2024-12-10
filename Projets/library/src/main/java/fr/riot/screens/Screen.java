@@ -23,6 +23,11 @@ import fr.riot.classes.ListItems;
 
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
@@ -118,15 +123,15 @@ public class Screen {
 		}
 
 		if (Main.getCurrentMode().equals(Mode.BOOKS)) {
+			list.setCellRenderer(new BookRender());
+
 			for (Book book : Main.getBooks())
 				defaultListModel.addElement(book);
-
-			list.setCellRenderer(new BookRender());
 		} else {
+			list.setCellRenderer(new ClientRender());
+
 			for (Client client : Main.getClients())
 				defaultListModel.addElement(client);
-	
-			list.setCellRenderer(new ClientRender());
 		}
 	}
 	
