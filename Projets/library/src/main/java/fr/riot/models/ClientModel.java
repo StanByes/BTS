@@ -44,6 +44,8 @@ public class ClientModel {
     			
     			return -1;
     		}
+    	} finally {
+    		Main.getConnection().releaseConnection();
     	}
     }
 }

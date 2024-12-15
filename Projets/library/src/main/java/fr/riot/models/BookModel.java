@@ -43,6 +43,8 @@ public class BookModel {
 
 				return -1;
     		}
+    	} finally {
+    		Main.getConnection().releaseConnection();
     	}
     }
 }

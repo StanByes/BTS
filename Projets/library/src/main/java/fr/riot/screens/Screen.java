@@ -21,18 +21,9 @@ import fr.riot.classes.Book;
 import fr.riot.classes.Client;
 import fr.riot.classes.ListItems;
 
-import java.awt.Window.Type;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
-import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
 
 public class Screen {
 
@@ -41,7 +32,10 @@ public class Screen {
 	private static JPanel contentPane;
 	private static DefaultListModel<ListItems> defaultListModel;
 	private static JList list;
+
 	private static JButton switcher;
+	private static JButton reservations;
+	private static JButton createReservation;
 	private static JButton create;
 	
 	private static BasePopup popup;
@@ -53,7 +47,7 @@ public class Screen {
 	private void initialize() {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
-		frame = new JFrame("Bibliothéque");
+		frame = new JFrame("Bibliothèque");
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,13 +61,31 @@ public class Screen {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 
+		reservations = new JButton("Liste des emprunts");
+		reservations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openPopup(new ReservationsPopup());
+			}
+		});
+		reservations.setBounds(screen.width / 4, 11, 150, 23);
+		contentPane.add(reservations);
+
+		createReservation = new JButton("Emprunter");
+		createReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openPopup(new CreateReservationPopup());
+			}
+		});
+		createReservation.setBounds((int) (screen.width / 1.5), 11, 150, 23);
+		contentPane.add(createReservation);
+
 		create = new JButton("Ajouter un livre");
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openPopup(new CreationPopup());
 			}
 		});
-		create.setBounds(screen.width - 140, 11, 130, 23);
+		create.setBounds(screen.width - 160, 11, 150, 23);
 		contentPane.add(create);
 
 		JLabel title = new JLabel("Liste des Livres");
@@ -101,7 +113,7 @@ public class Screen {
 				title.setText("Liste des " + Main.getCurrentMode().getDisplayName());
 			}
 		});
-		switcher.setBounds(10, 10, 90, 23);
+		switcher.setBounds(10, 10, 150, 23);
 		contentPane.add(switcher);
 
 		setModelList();
@@ -138,6 +150,8 @@ public class Screen {
 	public static void openPopup(BasePopup popup) {
 		switcher.setEnabled(false);
 		create.setEnabled(false);
+		reservations.setEnabled(false);
+		createReservation.setEnabled(false);
 
 		Screen.popup = popup;
 		
@@ -149,6 +163,8 @@ public class Screen {
 	public static void closePopup() {
 		switcher.setEnabled(true);
 		create.setEnabled(true);
+		reservations.setEnabled(true);
+		createReservation.setEnabled(true);
 		
 		layeredPane.remove(popup);
 		layeredPane.revalidate();

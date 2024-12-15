@@ -3,11 +3,14 @@ package fr.riot.classes;
 import java.sql.Date;
 
 public class Reservation {
-    private final int id;
+    private int id;
     private final Client client;
     private final Book book;
     private final Date bookedAt;
 
+    public Reservation(Client client, Book book) {
+    	this(-1, client, book, new Date(System.currentTimeMillis()));
+    }
     public Reservation(int id, Client client, Book book, Date bookedAt) {
         this.id = id;
         this.client = client;
@@ -26,5 +29,9 @@ public class Reservation {
     }
     public Date getBookedAt() {
         return bookedAt;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
     }
 }
