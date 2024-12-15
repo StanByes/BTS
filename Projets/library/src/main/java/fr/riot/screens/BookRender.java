@@ -41,12 +41,12 @@ public class BookRender implements ListCellRenderer<Book> {
         panel.add(publishedDate);
 
         JLabel total = new JLabel("Total : " + value.getTotal());
-        total.setBounds(listW - 100, 10, 100, 20);
+        total.setBounds(listW - 125, 10, 125, 20);
         panel.add(total);
         
         int availableBooks = Utils.getAvailableBooks(value);
         JLabel available = new JLabel("Disponible : " + (availableBooks == 0 ? "Aucun" : availableBooks));
-        available.setBounds(listW - 100, 30, 100, 20);
+        available.setBounds(listW - 125, 30, 125, 20);
         panel.add(available);
 
     	panel.setBackground(availableBooks == 0 ? Color.red : Color.green);
