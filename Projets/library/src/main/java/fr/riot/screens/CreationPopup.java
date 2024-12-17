@@ -92,9 +92,7 @@ public class CreationPopup extends BasePopup {
 					String author = authorField.getText();
 					
 					if (name.isEmpty() || author.isEmpty() || totalField.getText().isEmpty() || publishedField.getText().isEmpty()) {
-						add(info);
-						revalidate();
-						repaint();
+						// DO NOTHING
 					} else {
 						long total = (long) totalField.getValue();
 						Date publishedDate = (Date) publishedField.getValue();
@@ -140,7 +138,7 @@ public class CreationPopup extends BasePopup {
 			
 			JLabel birthdayLabel = new JLabel("Date de naissance (Au format 01/01/2024) :");
 			birthdayLabel.setFont(labelFont);
-			birthdayLabel.setBounds(15, 195, 250, 20);
+			birthdayLabel.setBounds(15, 195, 400, 20);
 			add(birthdayLabel);
 			
 			JFormattedTextField birthdayField = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
@@ -175,10 +173,8 @@ public class CreationPopup extends BasePopup {
 					String email = emailField.getText();
 					String phone = phoneField.getText();
 					
-					if (surname.isEmpty() || firstname.isEmpty() || birthdayField.getText().isEmpty() || email.isEmpty() || phone.isEmpty()) {
-						add(info);
-						revalidate();
-						repaint();
+					if (surname.isEmpty() || firstname.isEmpty() || birthdayField.getText().isEmpty()) {
+						// DO NOTHING
 					} else {
 						Date birthday = (Date) birthdayField.getValue();
 						
