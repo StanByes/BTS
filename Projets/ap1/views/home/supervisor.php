@@ -3,7 +3,7 @@
         <a class="nav-link active" data-bs-toggle="tab" href="#reports">Rapports des stagiaires</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#create">Liste des stagiaires</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#create">Liste de vos stagiaires</a>
     </li>
 </ul>
 

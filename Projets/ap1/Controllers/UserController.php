@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends AppController
 {
@@ -13,24 +12,28 @@ class UserController extends AppController
             $password = strip_tags($_POST['password']);
 
             if (empty($login) || empty($password)) {
-                // TODO : Send flash message
-                return;
+                self::flash(true, "Veuillez remplir tous les champs");
+                header("Location: ./?action=login");
+                die();
             }
 
             $use_mail = filter_var($login, FILTER_VALIDATE_EMAIL);
 
             $account = UserModel::getUser($login, $use_mail);
             if (!isset($account)) {
-                // TODO : Send flash message
-                return;
+                self::flash(true, "Login introuvable");
+                header("Location: ./?action=login");
+                die();
             }
 
             if (!UserModel::verifyPassword($password, $account->getPassword())) {
-                // TODO : Send flash message
-                return;
+                self::flash(true, "Couple login/mot de passe incorrect");
+                header("Location: ./?action=login");
+                die();
             }
 
             $_SESSION['user'] = serialize($account);
+            self::flash(false, "Connecté avec succès");
 
             header("Location: ./");
             die();

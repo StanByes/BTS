@@ -7,6 +7,7 @@ abstract class AppController
     {
         return unserialize($_SESSION["user"]);
     }
+
     protected static function render($route, $variables = []): void
     {
         if (!empty($_SESSION["user"])) {
@@ -17,5 +18,10 @@ abstract class AppController
 
         require VIEW_PATH . DS . $route . ".php";
         require_once VIEW_PATH . DS . "layouts/front.php";
+    }
+
+    protected static function flash($error, $message): void
+    {
+        $_SESSION["flash"] = ["error" => $error, "message" => $message];
     }
 }

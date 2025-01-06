@@ -8,9 +8,22 @@
 
     <body>
         <header>
-            <nav class="nav d-flex justify-content-end">
-                <a class="btn btn-close rounded bg-danger m-2" href="./?action=logout"></a>
-            </nav>
+            <?php
+            if (isset($_SESSION["user"])) {?>
+                <nav class="nav d-flex justify-content-end">
+                    <a class="btn btn-close rounded bg-danger m-2" href="./?action=logout"></a>
+                </nav>
+            <?php } ?>
+
+            <?php
+            if (isset($_SESSION["flash"])) {
+                $flash = $_SESSION["flash"];
+                $_SESSION["flash"] = null;
+                ?>
+                <div class="bg-<?= $flash["error"] ? "danger" : "success" ?> w-75 z-1 p-2 mt-2 mx-auto rounded">
+                    <h4 class="text-center"><?= $flash["message"] ?></h4>
+                </div>
+            <?php } ?>
         </header>
         <main class="mt-4">
             <div class="container-fluid">

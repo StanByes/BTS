@@ -15,11 +15,14 @@ class ReportController extends AppController
             $content = strip_tags($_POST['content']);
 
             if (empty($title) || empty($content)) {
-                // TODO : Send flash message
-                return;
+                self::flash(true, "Veuillez remplir tous les champs");
+                header("Location: ./");
+                die();
             }
 
             ReportModel::createReport(new Report(null, self::getUser(), $title, $content, new DateTime()));
+            self::flash(false, "Rapport créé avec succès");
+
             header("Location: ./");
             die();
         }
