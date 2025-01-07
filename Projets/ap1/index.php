@@ -8,6 +8,9 @@ require_once "./function.php";
 use App\Controllers\HomeController;
 use App\Controllers\ReportController;
 use App\Controllers\UserController;
+use App\Models\ResetPasswordQueryModel;
+
+ResetPasswordQueryModel::cleanOldQueries();
 
 session_start();
 $action = $_GET['action'] ?? '';

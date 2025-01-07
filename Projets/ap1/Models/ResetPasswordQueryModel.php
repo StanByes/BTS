@@ -55,6 +55,14 @@ class ResetPasswordQueryModel extends BaseModel
         return $prepare->execute();
     }
 
+    public static function cleanOldQueries(): bool
+    {
+        $q = "DELETE FROM `reset_password_queries` WHERE CURRENT_TIMESTAMP() > `unavailable_at`";
+        $prepare = self::getConnection()->prepare($q);
+
+        return $prepare->execute();
+    }
+
     /**
      * @throws DateMalformedStringException
      */
