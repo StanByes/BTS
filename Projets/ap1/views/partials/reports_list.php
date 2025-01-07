@@ -9,11 +9,11 @@ foreach ($reports as $report) {?>
                     ?>
                         <p class="text-center">
                             De <?= $report->getCreator()->getCompleteName() ?>
-                            le <?= $report->getCreatedAt()->format("d/m/Y à H:i") ?>
+                            le <?= formatDateTime($report->getCreatedAt()) ?>
                         </p>
                     <?php
                 } else { ?>
-                        <p class="text-center"><?= $report->getCreatedAt()->format("d/m/Y à H:i") ?></p>
+                        <p class="text-center"><?= formatDateTime($report->getCreatedAt()) ?></p>
                 <?php } ?>
             </div>
         </div>

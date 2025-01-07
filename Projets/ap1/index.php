@@ -3,6 +3,7 @@ namespace App;
 
 require_once "./autoload.php";
 require_once "./global.php";
+require_once "./function.php";
 
 use App\Controllers\HomeController;
 use App\Controllers\ReportController;
@@ -24,6 +25,7 @@ switch ($action) {
         break;
     case "logout":
         UserController::logout();
+        break;
     case "create_report":
         ReportController::create();
         break;

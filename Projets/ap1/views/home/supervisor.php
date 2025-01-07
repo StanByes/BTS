@@ -24,10 +24,20 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <h3 class="mb-4">Informations du stagiaire</h3>
                     <p><strong>Nom :</strong> <?= $intern->getSurname() ?></p>
                     <p><strong>Prénom :</strong> <?= $intern->getFirstname() ?></p>
                     <p><strong>Login :</strong> <?= $intern->getLogin() ?></p>
                     <p><strong>Adresse Mail :</strong> <?= $intern->getMail() ?></p>
+
+                    <hr>
+
+                    <h3 class="mb-4">Informations du stage</h3>
+                    <p><strong>Date de début :</strong> <?= formatDate($internship->getStartAt()) ?></p>
+                    <p><strong>Date de fin :</strong> <?= formatDate($internship->getEndAt()) ?></p>
+                    <p><strong>Heure d'arrivée journalier :</strong> <?= formatTime($internship->getDayStartAt()) ?></p>
+                    <p><strong>Heure de départ journalier :</strong> <?= formatTime($internship->getDayEndAt()) ?></p>
+
                 </div>
             </div>
         <?php } ?>
