@@ -8,6 +8,12 @@ abstract class AppController
         return unserialize($_SESSION["user"]);
     }
 
+    protected static function sendMail($to, $subject, $content)
+    {
+        $report = "reports@internship.fr";
+        mail($to, $subject, "$content", "From: $report");
+    }
+
     protected static function render($route, $variables = []): void
     {
         if (!empty($_SESSION["user"])) {

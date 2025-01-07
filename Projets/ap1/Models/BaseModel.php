@@ -11,7 +11,7 @@ abstract class BaseModel
         return new PDO("mysql:host=".$config["host"].";dbname=".$config["name"], $config["user"], $config["password"]);
     }
 
-    public static function map($attributes): string
+    protected static function map($attributes): string
     {
         return join(", ", array_map(function ($atr) {
             return "`$atr`";

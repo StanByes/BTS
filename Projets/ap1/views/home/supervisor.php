@@ -18,12 +18,12 @@
             $intern = $internship->getIntern();
             ?>
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#intern_<?= $intern->getId() ?>">
                     <div class="d-flex justify-content-center">
                         <h4 class="text-center"><?= $intern->getCompleteName() ?></h4>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="intern_<?= $intern->getId() ?>">
                     <h3 class="mb-4">Informations du stagiaire</h3>
                     <p><strong>Nom :</strong> <?= $intern->getSurname() ?></p>
                     <p><strong>Prénom :</strong> <?= $intern->getFirstname() ?></p>
@@ -35,8 +35,8 @@
                     <h3 class="mb-4">Informations du stage</h3>
                     <p><strong>Date de début :</strong> <?= formatDate($internship->getStartAt()) ?></p>
                     <p><strong>Date de fin :</strong> <?= formatDate($internship->getEndAt()) ?></p>
-                    <p><strong>Heure d'arrivée journalier :</strong> <?= formatTime($internship->getDayStartAt()) ?></p>
-                    <p><strong>Heure de départ journalier :</strong> <?= formatTime($internship->getDayEndAt()) ?></p>
+                    <p><strong>Heure d'arrivée journalière:</strong> <?= formatTime($internship->getDayStartAt()) ?></p>
+                    <p><strong>Heure de départ journalière :</strong> <?= formatTime($internship->getDayEndAt()) ?></p>
 
                 </div>
             </div>

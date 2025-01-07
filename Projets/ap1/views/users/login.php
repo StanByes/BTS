@@ -16,6 +16,10 @@ ob_start();
         <input id="password" class="form-control" type="password" name="password">
     </div>
 
+    <div class="mb-2">
+        <a href="./?action=reset_password_query">Mot de passe oublié ?</a>
+    </div>
+
     <div class="d-flex justify-content-center mt-4">
         <button class="btn btn-primary w-75">Valider</button>
     </div>

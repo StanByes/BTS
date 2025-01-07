@@ -29,6 +29,17 @@ class UserModel extends BaseModel
         return self::createObject($rows[0]);
     }
 
+    public static function changePassword($user, $password): bool
+    {
+        $q = "UPDATE `users` SET `password` = ? WHERE `id` = ?";
+        $prepare = self::getConnection()->prepare($q);
+        $prepare->bindParam(1, $password);
+        $user_id = $user->getId();
+        $prepare->bindParam(2, $user_id);
+
+        return $prepare->execute();
+    }
+
     protected static function createObject($data): User
     {
         return new User(
