@@ -9,22 +9,7 @@
 
 <div class="tab-content mt-5">
     <div class="tab-pane container active" id="reports">
-        <?php
-        foreach ($reports as $report) {?>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="text-center"><?= $report->getTitle() ?></h4>
-                        <p class="text-center"><?= $report->getCreatedAt()->format("d/m/Y à H:i") ?></p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <label class="form-label" for="content">Contenu du rapport :</label>
-                    <textarea disabled id="content" class="form-control" rows="3"><?= $report->getContent() ?>
-                    </textarea>
-                </div>
-            </div>
-        <?php } ?>
+        <?php include VIEW_PATH . DS . "partials/reports_list.php" ?>
     </div>
 
     <div class="tab-pane container fade" id="create">
