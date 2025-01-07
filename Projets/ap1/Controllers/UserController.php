@@ -91,8 +91,8 @@ class UserController extends AppController
 
             $url .= $_SERVER['HTTP_HOST'] . explode("?", $_SERVER['REQUEST_URI'])[0];
             $url .= "?action=reset_password&code=" . $code;
-            $content = "Vous avez demandé à réinitialiser votre mot de passe sur notre plateforme
-            ! Voici un lien de réinitialisation unique, valable 1 heure : " . $url;
+            $content = "Vous avez demandé à réinitialiser votre mot de passe sur notre plateforme !
+Voici un lien de réinitialisation unique, valable 1 heure : " . $url;
             self::sendMail($mail, "Réinitialisation de mot de passe", $content);
 
             self::flash(false, "Mail envoyé avec succès");

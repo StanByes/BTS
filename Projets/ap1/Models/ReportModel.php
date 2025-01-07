@@ -12,7 +12,7 @@ class ReportModel extends BaseModel
     public static function getReportsByUser($user): array | null
     {
         $atr = ["id", "creator_id", "title", "content", "created_at"];
-        $q = "SELECT " . self::map($atr) . " FROM `reports` WHERE `creator_id` = ?";
+        $q = "SELECT " . self::map($atr) . " FROM `reports` WHERE `creator_id` = ? ORDER BY `created_at` DESC";
         $rows = self::executeSelect($q, [$user->getId()]);
 
         $result = array();

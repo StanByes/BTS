@@ -5,6 +5,9 @@
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#create">Ajouter un rapport</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#profil">Modifier mon profil</a>
+    </li>
 </ul>
 
 <div class="tab-content mt-5">
@@ -28,5 +31,8 @@
                 <button class="btn btn-success w-75">Valider</button>
             </div>
         </form>
+    </div>
+
+    <div class="tab-pane container active" id="profil">
     </div>
 </div>

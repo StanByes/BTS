@@ -17,7 +17,7 @@ ob_start();
     </div>
 
     <div class="mb-2">
-        <a href="./?action=reset_password_query">Mot de passe oublié ?</a>
+        <a class="text-decoration-none" href="./?action=reset_password_query">Mot de passe oublié ?</a>
     </div>
 
     <div class="d-flex justify-content-center mt-4">

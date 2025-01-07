@@ -9,6 +9,15 @@
 
 <div class="tab-content mt-5">
     <div class="tab-pane container active" id="reports">
+        <?php
+        if ($specificUser) {
+            ?>
+                <div class="d-flex justify-content-center">
+                    <a href="./" class="btn btn-danger mb-4">Revenir à tous les rapports</a>
+                </div>
+            <?php
+        }
+        ?>
         <?php include VIEW_PATH . DS . "partials/reports_list.php" ?>
     </div>
 
@@ -24,11 +33,16 @@
                     </div>
                 </div>
                 <div class="card-body collapse" id="intern_<?= $intern->getId() ?>">
-                    <h3 class="mb-4">Informations du stagiaire</h3>
-                    <p><strong>Nom :</strong> <?= $intern->getSurname() ?></p>
-                    <p><strong>Prénom :</strong> <?= $intern->getFirstname() ?></p>
-                    <p><strong>Login :</strong> <?= $intern->getLogin() ?></p>
-                    <p><strong>Adresse Mail :</strong> <?= $intern->getMail() ?></p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3 class="mb-4">Informations du stagiaire</h3>
+                            <p><strong>Nom :</strong> <?= $intern->getSurname() ?></p>
+                            <p><strong>Prénom :</strong> <?= $intern->getFirstname() ?></p>
+                            <p><strong>Login :</strong> <?= $intern->getLogin() ?></p>
+                            <p><strong>Adresse Mail :</strong> <?= $intern->getMail() ?></p>
+                        </div>
+                        <a class="btn btn-primary h-25" href="?user=<?= $intern->getId() ?>">Voir les rapports</a>
+                    </div>
 
                     <hr>
 
