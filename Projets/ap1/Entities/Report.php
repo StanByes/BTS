@@ -21,6 +21,11 @@ class Report
         $this->createdAt = $createdAt;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getCreator(): User
     {
         return $this->creator;

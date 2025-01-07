@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Entities\Role;
-use PDO;
 
 class RoleModel extends BaseModel
 {

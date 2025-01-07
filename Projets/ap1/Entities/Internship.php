@@ -17,4 +17,9 @@ class Internship
     {
         return $this->intern;
     }
+
+    public function getSupervisor(): User
+    {
+        return $this->supervisor;
+    }
 }

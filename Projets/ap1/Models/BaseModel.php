@@ -1,12 +1,11 @@
 <?php
 namespace App\Models;
 
-use http\Exception\RuntimeException;
 use PDO;
 
 abstract class BaseModel
 {
-    public static function getConnection(): \PDO
+    public static function getConnection(): PDO
     {
         $config = require CONFIG_PATH . "/databases.php";
         return new PDO("mysql:host=".$config["host"].";dbname=".$config["name"], $config["user"], $config["password"]);

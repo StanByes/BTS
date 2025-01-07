@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends AppController
 {
@@ -42,7 +43,7 @@ class UserController extends AppController
         AppController::render("users/login");
     }
 
-    public static function logout(): void
+    #[NoReturn] public static function logout(): void
     {
         session_destroy();
         header("Location: ./");

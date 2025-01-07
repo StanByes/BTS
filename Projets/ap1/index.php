@@ -24,7 +24,6 @@ switch ($action) {
         break;
     case "logout":
         UserController::logout();
-        break;
     case "create_report":
         ReportController::create();
         break;
