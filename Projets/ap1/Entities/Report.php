@@ -10,14 +10,16 @@ class Report
     private User $creator;
     private string $title;
     private string $content;
+    private DateTime $date;
     private DateTime $createdAt;
 
-    public function __construct($id, $creator, $title, $content, $createdAt)
+    public function __construct($id, $creator, $title, $content, $date, $createdAt)
     {
         $this->id = $id;
         $this->creator = $creator;
         $this->title = $title;
         $this->content = $content;
+        $this->date = $date;
         $this->createdAt = $createdAt;
     }
 
@@ -39,6 +41,11 @@ class Report
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function getDate(): DateTime
+    {
+        return $this->date;
     }
 
     public function getCreatedAt(): DateTime

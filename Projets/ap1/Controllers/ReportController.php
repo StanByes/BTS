@@ -13,14 +13,17 @@ class ReportController extends AppController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $title = strip_tags($_POST["title"]);
             $content = strip_tags($_POST['content']);
+            $date = strip_tags($_POST["date"]);
 
-            if (empty($title) || empty($content)) {
+            if (empty($title) || empty($content) || empty($date)) {
                 self::flash(true, "Veuillez remplir tous les champs");
                 header("Location: ./");
                 die();
             }
 
-            ReportModel::createReport(new Report(null, self::getUser(), $title, $content, new DateTime()));
+            $date = DateTime::createFromFormat("Y-m-d", $date);
+            $report = new Report(null, self::getUser(), $title, $content, $date, new DateTime());
+            ReportModel::createReport($report);
             self::flash(false, "Rapport créé avec succès");
 
             header("Location: ./");

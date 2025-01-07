@@ -9,11 +9,11 @@ foreach ($reports as $report) {?>
                     ?>
                         <p class="text-center">
                             De <?= $report->getCreator()->getCompleteName() ?>
-                            le <?= formatDateTime($report->getCreatedAt()) ?>
+                            posté le <?= formatDateTime($report->getCreatedAt()) ?>
                         </p>
                     <?php
                 } else { ?>
-                        <p class="text-center"><?= formatDateTime($report->getCreatedAt()) ?></p>
+                        <p class="text-center">Posté le <?= formatDateTime($report->getCreatedAt()) ?></p>
                 <?php } ?>
             </div>
         </div>
@@ -21,6 +21,7 @@ foreach ($reports as $report) {?>
             <label class="form-label" for="content">Contenu du rapport :</label>
             <textarea disabled id="content" class="form-control" rows="3"><?= $report->getContent() ?>
                     </textarea>
+            <p class="mt-2"><strong>Date : </strong> <?= formatDate($report->getDate()) ?></p>
         </div>
     </div>
 <?php } ?>

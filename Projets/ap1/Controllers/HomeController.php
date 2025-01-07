@@ -36,6 +36,10 @@ class HomeController extends AppController
             $reports = ReportModel::getReportsByUser($user);
         }
 
+        usort($reports, function ($a, $b) {
+            return $a->getDate() < $b->getDate();
+        });
+
         self::render("home", compact("reports", "internships", "specificUser"));
     }
 }

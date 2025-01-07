@@ -27,6 +27,11 @@
                 <textarea class="form-control" name="content" id="content" rows="3"></textarea>
             </div>
 
+            <div class="form-group mb-3">
+                <label for="date">Date :</label>
+                <input class="form-control" name="date" id="date" type="date">
+            </div>
+
             <div class="d-flex justify-content-center mb-4">
                 <button class="btn btn-success w-75">Valider</button>
             </div>
