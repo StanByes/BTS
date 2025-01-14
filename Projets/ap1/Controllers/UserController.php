@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\InternshipModel;
 use App\Models\ResetPasswordQueryModel;
 use App\Models\UserModel;
 use http\Exception\RuntimeException;
@@ -136,5 +137,38 @@ Voici un lien de réinitialisation unique, valable 1 heure : " . $url;
         }
 
         AppController::render("users/reset_password", compact("resetPasswordQuery"));
+    }
+
+    public static function update(): void
+    {
+        $surname = strip_tags($_POST['surname']);
+        $firstname = strip_tags($_POST['firstname']);
+        $mail = strip_tags($_POST['mail']);
+
+        $internshipStartAt = strip_tags($_POST["start_at"]);
+        $internshipEndAt = strip_tags($_POST["end_at"]);
+
+        if (empty($surname) || empty($firstname) || empty($mail)
+            || empty($internshipStartAt) || empty($internshipEndAt)) {
+            self::flash(true, "Veuillez remplir tous les champs obligatoires");
+            header("Location: ./");
+            die();
+        }
+
+        $internshipDayStartAt = $_POST["day_start_at"] ?? null;
+        $internshipDayEndAt = $_POST["day_end_at"] ?? null;
+
+        UserModel::updateUser(self::getUser(), $surname, $firstname, $mail);
+        InternshipModel::updateInternship(
+            self::getUser(),
+            $internshipStartAt,
+            $internshipEndAt,
+            $internshipDayStartAt,
+            $internshipDayEndAt
+        );
+
+        self::flash(false, "Profil mis à jour avec succès");
+        header("Location: ./");
+        die();
     }
 }

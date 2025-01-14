@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\InternshipModel;
+
 abstract class AppController
 {
     protected static function getUser()
@@ -18,6 +20,7 @@ abstract class AppController
     {
         if (!empty($_SESSION["user"])) {
             $user = unserialize($_SESSION["user"]);
+            $internship = InternshipModel::getInternshipByUser($user);
         }
 
         extract($variables);

@@ -40,6 +40,20 @@ class UserModel extends BaseModel
         return $prepare->execute();
     }
 
+    public static function updateUser($user, $surname, $firstname, $mail): bool
+    {
+        $q = "UPDATE `users` SET `surname` = ?, `firstname` = ?, `mail` = ? WHERE `id` = ?";
+        $prepare = self::getConnection()->prepare($q);
+        $prepare->bindParam(1, $surname);
+        $prepare->bindParam(2, $firstname);
+        $prepare->bindParam(3, $mail);
+
+        $userId = $user->getId();
+        $prepare->bindParam(4, $userId);
+
+        return $prepare->execute();
+    }
+
     protected static function createObject($data): User
     {
         return new User(

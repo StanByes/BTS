@@ -8,7 +8,7 @@ ob_start();
 <form method="post">
     <div class="form-group mb-3">
         <label class="form-label" for="mail">Votre addresse mail :</label>
-        <input id="mail" class="form-control" name="mail" type="email">
+        <input id="mail" class="form-control" name="mail" type="email" required="required">
     </div>
 
     <div class="d-flex justify-content-center mt-4">

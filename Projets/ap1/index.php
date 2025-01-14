@@ -38,6 +38,9 @@ switch ($action) {
     case "create_report":
         ReportController::create();
         break;
+    case "edit_user":
+        UserController::update();
+        break;
     default:
         HomeController::home();
         break;

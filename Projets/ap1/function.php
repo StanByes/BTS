@@ -1,4 +1,13 @@
 <?php
+function formatDateForElement($date): string
+{
+    return $date->format("Y-m-d");
+}
+
+function formatTimeForElement($date, $second = true): string
+{
+    return $date->format("H:i" . ($second ? ":s" : ""));
+}
 
 function formatDate($date): string
 {

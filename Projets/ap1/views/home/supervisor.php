@@ -49,9 +49,18 @@
                     <h3 class="mb-4">Informations du stage</h3>
                     <p><strong>Date de début :</strong> <?= formatDate($internship->getStartAt()) ?></p>
                     <p><strong>Date de fin :</strong> <?= formatDate($internship->getEndAt()) ?></p>
-                    <p><strong>Heure d'arrivée journalière:</strong> <?= formatTime($internship->getDayStartAt()) ?></p>
-                    <p><strong>Heure de départ journalière :</strong> <?= formatTime($internship->getDayEndAt()) ?></p>
-
+                    <p>
+                        <strong>Heure d'arrivée journalière:</strong>
+                        <?= $internship->getDayStartAt() !== null
+                            ? formatTime($internship->getDayStartAt())
+                            : "Non défini" ?>
+                    </p>
+                    <p>
+                        <strong>Heure de départ journalière :</strong>
+                        <?= $internship->getDayEndAt() !== null
+                            ? formatTime($internship->getDayEndAt())
+                            : "Non défini" ?>
+                    </p>
                 </div>
             </div>
         <?php } ?>

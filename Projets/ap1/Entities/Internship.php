@@ -10,8 +10,8 @@ class Internship
     private User $supervisor;
     private DateTime $startAt;
     private DateTime $endAt;
-    private DateTime $dayStartAt;
-    private DateTime $dayEndAt;
+    private DateTime | null $dayStartAt;
+    private DateTime | null $dayEndAt;
 
     public function __construct($intern, $supervisor, $startAt, $endAt, $dayStartAt, $dayEndAt)
     {
@@ -43,12 +43,12 @@ class Internship
         return $this->endAt;
     }
 
-    public function getDayStartAt(): DateTime
+    public function getDayStartAt(): DateTime | null
     {
         return $this->dayStartAt;
     }
 
-    public function getDayEndAt(): DateTime
+    public function getDayEndAt(): DateTime | null
     {
         return $this->dayEndAt;
     }
