@@ -16,6 +16,10 @@ body {
     background-color: rgba(124, 158, 209, 0.72);
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 main {
     margin-top: 5%;
 }
