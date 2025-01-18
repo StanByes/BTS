@@ -1,0 +1,199 @@
+<!doctype HTML>
+<html lang="fr">
+    <head>
+        <title>Bastien Riot</title>
+
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+        <header class="d-flex justify-content-center mb-5">
+            <nav class="navbar navbar-expand-lg fixed-top w-100">
+                <div class="container-fluid">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end fw-bold w-100 fs-5">
+                        <li class="nav-item ms-4">
+                            <a class="nav-link" href="#about">Présentation</a>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <a class="nav-link" href="#projects">Projets</a>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <a class="nav-link" href="#internship">Alternance</a>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <a class="nav-link" href="#competences">Compétences & Etudes</a>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <a class="nav-link" href="#veille">Veille technologique</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container-fluid bg-transparent border border-3 rounded section" id="#about">
+                <div class=" d-flex flex-column justify-content-center align-items-center">
+                    <img src="./images/me.jpg" class="rounded rounded-5 img-thumbnail mt-2" alt="me" style="width: 10%;">
+                    <h1 class="fw-bold mt-1">Bastien Riot</h1>
+                </div>
+
+                <p class="mt-3 mb-1 text-center">Bonjour ! Je m'appelle Bastien Riot et je suis étudiant en BTS Services Informatiques aux Organisations 1ère année.</p>
+                <p class="text-center">Je programme par passion en autodidacte depuis l'âge de 10 ans et exploite mes compétences dans le cadre associatif et professionnel depuis plus de 5 ans.</p>
+            </div>
+
+            <hr>
+
+            <div class="container-fluid bg-transparent border border-3 rounded section" id="#projects">
+                <h2 class="text-center">Mes Projets Web</h2>
+
+                <div id="webProjects" class="carousel slide w-75 m-auto p-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/projects/index.png" class="d-block w-75 m-auto rounded" alt="Navigation projets web">
+                            <div class="carousel-caption d-none d-md-block">
+                                <a class="h5" href="https://sioslam.fr/RIOT" target="_blank">Page d'accueil de navigation de mes projets</a>
+                                <p>Sur cette page en HTML/CSS natif, nous retrouvons le lien vers tous mes projets WEB</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/stackfindover.png" class="d-block w-75 m-auto rounded" alt="Stackfindover">
+                            <div class="carousel-caption d-none d-md-block">
+                                <a class="h5 text-dark" href="https://sioslam.fr/RIOT/td4/" target="_blank">Formulaires PHP de connexion / inscription</a>
+                                <p class="text-dark">Sur cette page en HTML/CSS + Bootstrap 5, nous retrouvons un système simple de création de compte et de connexion avec du PHP et Mysql</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/wordpress.png" class="d-block w-75 m-auto rounded" alt="Wordpress">
+                            <div class="carousel-caption d-none d-md-block">
+                                <a class="h5 text-dark" href="https://sioslam.fr/RIOT/wordpress/" target="_blank">Installation et paramétrage de WordPress</a>
+                                <p class="text-dark">Ce projet consistait a installer WordPress sur un hébergement Web FTP et de le configurer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#webProjects" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#webProjects" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <h2 class="text-center">Mes Projets Java</h2>
+
+                <div id="javaProjects" class="carousel slide w-75 m-auto p-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/projects/main_java.png" class="d-block w-25 m-auto rounded" alt="Navigation projets java">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>CLI de lancement des différents projets Java</h5>
+                                <p>Grâce à une console interactive, vous pouvez démarrer tous les différents programmes que j'ai réalisé</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/cli_pfc.png" class="d-block w-50 m-auto rounded" alt="Pierre feuille ciseaux en console">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Pierre feuille ciseaux en console</h5>
+                                <p>Jouez à Pierre Feuille Ciseaux avec votre machine depuis la console</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/cli_bn.png" class="d-block w-50 m-auto rounded" alt="Bataille navale en console">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Bataille navale en console</h5>
+                                <p>Jouez à la bataille navale avec votre machine depuis la console</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/ihm_devine.png" class="d-block w-50 m-auto rounded" alt="IHM Devine le nombre">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-dark">Devine le nombre visuel</h5>
+                                <p class="text-dark">Jouez à Devine le nombre avec une interface graphique dédiée</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/ihm_calcul.png" class="d-block w-50 m-auto rounded" alt="IHM Calculatrice">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-dark">Calculatrice avancée</h5>
+                                <p class="text-dark">Calculatrice avancée permettant d'exécuter des calculs à la suite en conservant les résultats</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/ihm_pfc.png" class="d-block w-50 m-auto rounded" alt="IHM Pierre Feuille Ciseaux">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-dark">Pierre feuille ciseaux visuel</h5>
+                                <p class="text-dark mb-5">Jouez à Pierre Feuille Ciseaux avec votre machine sur une interface graphique</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/ihm_bn.png" class="d-block w-50 m-auto rounded" alt="IHM Bataille navale">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-dark">Bataille navale visuelle</h5>
+                                <p class="text-dark">Jouez à la bataille navale avec votre machine sur une interface graphique</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#javaProjects" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#javaProjects" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <h2 class="text-center">Mes Projets Annexes</h2>
+
+                <div id="otherProjects" class="carousel slide w-75 m-auto p-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/projects/library.png" class="d-block w-75 m-auto rounded" alt="Gestion de bibliothèque">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="text-dark">Logiciel de gestion d'une bibliothèque</h5>
+                                <p class="text-dark">Programme réalisé en Java avec Swing et Mysql Connector pour gérer une bibliothèque (livres, clients, emprunts)</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/projects/ap1.png" class="d-block w-75 m-auto rounded" alt="Gestion de stages">
+                            <div class="carousel-caption d-none d-md-block">
+                                <a class="h5 text-dark" href="https://sioslam.fr/RIOT/ap1/" target="_blank">Gestion de stages</a>
+                                <p class="text-dark">Ce site est un faux gestionnaire de stage dans lequel les stagiaires peuvent envoyer leur rapport de stage journalier qui peuvent être consultés par le maître de stage attitré</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#otherProjects" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#otherProjects" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="container-fluid bg-transparent border border-2 rounded section" id="#internship">
+                <h2>Mon Alternance</h2>
+            </div>
+
+            <hr>
+
+            <div class="container-fluid bg-transparent border border-2 rounded section" id="#competences">
+                <h2>Mes Compétences & Etudes</h2>
+            </div>
+
+            <hr>
+
+            <div class="container-fluid bg-transparent border border-2 rounded section" id="#veille">
+                <h2>Veille technologique</h2>
+            </div>
+        </main>
+        <script src="./js/lib/bootstrap.min.js"></script>
+    </body>
+</html>
