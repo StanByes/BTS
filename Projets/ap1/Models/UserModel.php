@@ -7,6 +7,18 @@ class UserModel extends BaseModel
 {
     private static array $atr = ["id", "firstname", "surname", "login", "mail", "password", "role_id"];
 
+    public static function getAllUsers(): array
+    {
+        $query = "SELECT " . self::map(self::$atr) . " FROM `users`";
+        $rows = self::executeSelect($query);
+        $result = array();
+        foreach ($rows as $row) {
+            $result[] = self::createObject($row);
+        }
+
+        return $result;
+    }
+
     public static function getUserById($id): User | null
     {
         $query = "SELECT " . self::map(self::$atr) . " FROM `users` WHERE `id` = ?";

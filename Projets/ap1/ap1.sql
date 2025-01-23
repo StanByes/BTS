@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 18 jan. 2025 à 16:46
+-- Généré le : sam. 18 jan. 2025 à 16:34
 -- Version du serveur : 11.5.2-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -36,14 +36,6 @@ CREATE TABLE `internships` (
   `day_end_at` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
---
--- Déchargement des données de la table `internships`
---
-
-INSERT INTO `internships` (`intern_id`, `supervisor_id`, `start_at`, `end_at`, `day_start_at`, `day_end_at`) VALUES
-(1, 2, '2025-01-07', '2025-01-23', NULL, '17:00:00'),
-(7, 2, '2025-01-08', '2025-01-10', '10:00:00', '18:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -58,20 +50,6 @@ CREATE TABLE `reports` (
   `date` date NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-
---
--- Déchargement des données de la table `reports`
---
-
-INSERT INTO `reports` (`id`, `creator_id`, `title`, `content`, `date`, `created_at`) VALUES
-(1, 1, '1er test !', 'Je suis un premier test de raport de stage inclus à la mano dans la BDD.', '2025-01-01', '2025-01-06 14:38:55'),
-(2, 1, 'test', 'test', '2025-01-02', '2025-01-06 14:57:44'),
-(3, 1, 'Je suis un deuxieme test', 'uqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfbuqzbduqzdbquzdbqiugbqzudbqiuzfb', '2025-01-03', '2025-01-06 14:57:58'),
-(4, 1, '3eme test', 'qzdbqzudbqzdubqziufbqeiufbqziucbqzuivbqeiuvbqzcbqizucbqziudqbzd\r\n', '2025-01-04', '2025-01-06 15:00:53'),
-(5, 1, 'test flash', 'teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh teqqnzdiqzndiqznd qizfhqifb qzjdqzi fqifh qzdqiz dj qizhdiqz ifqh egiqdizhdi qzhfiqz d iqzhfiqhfi qzfh \r\n', '2025-01-05', '2025-01-06 15:59:17'),
-(6, 1, 'sfsf', 'test', '2025-01-06', '2025-01-07 10:28:49'),
-(7, 7, 'test', 'test', '2025-01-04', '2025-01-07 16:26:32'),
-(8, 1, 'Jour 1', 'Je suis le premier jour', '2025-01-08', '2025-01-07 16:41:45');
 
 -- --------------------------------------------------------
 
@@ -99,14 +77,6 @@ CREATE TABLE `roles` (
   `display_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
---
--- Déchargement des données de la table `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `display_name`) VALUES
-(1, 'intern', 'Stagiaire'),
-(2, 'supervisor', 'Maître de stage');
-
 -- --------------------------------------------------------
 
 --
@@ -122,15 +92,6 @@ CREATE TABLE `users` (
   `password` tinytext NOT NULL,
   `role_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `firstname`, `surname`, `login`, `mail`, `password`, `role_id`) VALUES
-(1, 'Bastien', 'Riot', 'StanByes', 'bastienriot2@gmail.com', '$2y$10$QeHoI8vqpOcMoNpp8xpAU.lN0YRx2BHndnfsaT9/pdkfbdJy4JrUG', 1),
-(2, 'Prof', 'Prof', 'prof', 'prof.prof@gmail.com', '$2a$12$lRorEMFV5oQ/EfhtUK822.qVLy0ZS0W9KBf7EJWgWVaY5WINq3CrG', 2),
-(7, 'Test', 'test', 'test', 'test@gmail.com', '$2a$12$gnqMu3dsmyFaelr.1vzP.uHyuio8LeUWRiCvwl71XsKrJ5OVOo2pG', 1);
 
 --
 -- Index pour les tables déchargées
@@ -179,25 +140,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `reset_password_queries`
 --
 ALTER TABLE `reset_password_queries`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées

@@ -9,10 +9,23 @@ use http\Exception\RuntimeException;
 
 class ReportModel extends BaseModel
 {
+    private static array $atr = ["id", "creator_id", "title", "content", "date", "created_at"];
+
+    public static function getReportsCount($user = null): int
+    {
+        $q = "SELECT COUNT(*) as `count` FROM `reports`" . ($user != null ? " WHERE `creator_id` = ?" : "");
+
+        $params = array();
+        if (isset($user)) {
+            $params[] = $user->getId();
+        }
+
+        $rows = self::executeSelect($q, $params);
+        return $rows[0]["count"];
+    }
     public static function getReportsByUser($user): array | null
     {
-        $atr = ["id", "creator_id", "title", "content", "date", "created_at"];
-        $q = "SELECT " . self::map($atr) . " FROM `reports` WHERE `creator_id` = ?";
+        $q = "SELECT " . self::map(self::$atr) . " FROM `reports` WHERE `creator_id` = ?";
         $rows = self::executeSelect($q, [$user->getId()]);
 
         $result = array();

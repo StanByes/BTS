@@ -15,6 +15,10 @@ class HomeController extends AppController
         $reports = array();
         $specificUser = false;
 
+        $users = array();
+        $totalReports = 0;
+        $reportsCountByUsers = array();
+
         if ($user->getRole()->getName() == "supervisor") {
             $internships = InternshipModel::getAllInternsBySupervisor($user);
             if (empty($_GET["user"])) {
@@ -32,6 +36,13 @@ class HomeController extends AppController
 
                 $reports = ReportModel::getReportsByUser($searchedUser);
             }
+        } elseif ($user->getRole()->getName() == "gestion") {
+            $users = UserModel::getAllUsers();
+            $totalReports = ReportModel::getReportsCount();
+
+            foreach ($users as $user) {
+                $reportsCountByUsers[$user->getId()] = ReportModel::getReportsCount($user);
+            }
         } else {
             $reports = ReportModel::getReportsByUser($user);
         }
@@ -40,6 +51,13 @@ class HomeController extends AppController
             return $a->getDate() < $b->getDate();
         });
 
-        self::render("home", compact("reports", "internships", "specificUser"));
+        self::render("home", compact(
+            "reports",
+            "internships",
+            "specificUser",
+            "users",
+            "totalReports",
+            "reportsCountByUsers"
+        ));
     }
 }
