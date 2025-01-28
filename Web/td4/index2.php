@@ -72,6 +72,13 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
                         <div class="card-body">
                             <span>Mettre à jour vos informations</span>
 
+                            <h4>Bonjour <?= $data['Sexe'] == 0 ? 'Monsieur' : 'Madame' ?></h4>
+                            <?php if (isset($data['Annee_BAC'])) { ?>
+                                <p>Vous avez obtenu votre BAC il y a <?= date('Y') - intval($data['Annee_BAC']) ?> an(s)</p>
+                            <?php } else { ?>
+                                <p>Année d'obtention du BAC : inconnu</p>
+                            <?php } ?>
+
                             <form action="./update.php" method="POST">
                                 <input type="hidden" name="old_login" value="<?= $data['login'] ?>">
 

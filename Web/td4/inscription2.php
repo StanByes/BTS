@@ -3,7 +3,7 @@ include "../_conf.php";
 
 $values = array();
 foreach (array('name', 'firstname', 'email', 'login', 'password', 'verif_password', 'birthday', 'gender', 'bac', 'tel') as $v) {
-    if (empty($_POST[$v]) && $v !== 'tel') {
+    if (empty($_POST[$v]) && $v !== 'tel' && $v !== 'bac') {
         echo "Le champ $v est vide ! Merci de remplir tous les champs. <br> <a href='./inscription.php'>Revenir à la page d'inscription</a>";
         return;
     }
@@ -14,7 +14,7 @@ foreach (array('name', 'firstname', 'email', 'login', 'password', 'verif_passwor
     if ($v !== 'verif_password')
         $values[] = $v == 'password'
             ? password_hash($_POST[$v], PASSWORD_BCRYPT)
-            : ($v == 'tel' && empty($_POST[$v])
+            : ($v == 'tel' || $v == 'bac' && empty($_POST[$v])
                 ? null
                 : $_POST[$v]);
 }

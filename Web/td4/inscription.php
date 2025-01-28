@@ -63,6 +63,7 @@
                     <div class="form-group mt-4">
                         <label for="bac" class="form-label">Année du bac</label>
                         <select id="password" name="bac" class="form-control">
+                            <option></option>
                             <?php
                                 for ($i = date('Y'); $i >= 1970; $i--) { ?>
                                     <option value="<?= $i ?>"><?= $i ?></option>
