@@ -12,28 +12,21 @@
 
         <div class="card mt-5 m-auto w-25 h-50 shadow p-3 mb-5 bg-body rounded">
             <div class="card-body">
-                <span>Connectez-vous à votre compte</span>
+                <span>Mot de passe oublié</span>
 
-                <form action="./index2.php" method="POST">
+                <form action="./oubli2.php" method="POST">
                     <div class="form-group mt-4">
-                        <label for="login" class="form-label">Login</label>
-                        <input type="text" id="login" name="login" class="form-control" required="required">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control">
                     </div>
 
                     <div class="form-group mt-4">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" required="required">
+                        <label for="birthday" class="form-label">Date de naissance</label>
+                        <input type="date" id="birthday" name="birthday" class="form-control">
                     </div>
-
-                    <div class="form-group mt-4">
-                        <label for="code" class="form-label">Code à 5 chiffre</label>
-                        <input type="number" min="0" max="99999" id="code" name="code" class="form-control" required="required">
-                    </div>
-
-                    <a class="btn btn-outline-primary btn-sm mt-4" href="./oubli.php">Mot de passe oublié ?</a>
 
                     <div class="d-flex justify-content-center mt-5">
-                        <button class="btn btn-success w-100">Continue</button>
+                        <button class="btn btn-success w-100">Envoyer</button>
                     </div>
                 </form>
             </div>
