@@ -16,7 +16,7 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
         return;
     }
 
-    $query = $connection->prepare("SELECT `id`, `nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC`, `tel` FROM `ADHERENT` WHERE `login` = ?");
+    $query = $connection->prepare("SELECT `id`, `type`, `nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC`, `tel` FROM `ADHERENT` WHERE `login` = ?");
     $query->bind_param('s', $login);
 
     if ($query->execute()) {
@@ -70,6 +70,7 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
 
                     <div class="card mt-5 m-auto w-25 shadow p-3 mb-5 bg-body rounded">
                         <div class="card-body">
+                            <h1 class="text-center">PARTIE <?= $data['type'] == 'prof' ? "PROF" : "ELEVE" ?></h1>
                             <span>Mettre à jour vos informations</span>
 
                             <h4>Bonjour <?= $data['Sexe'] == 0 ? 'Monsieur' : 'Madame' ?></h4>
