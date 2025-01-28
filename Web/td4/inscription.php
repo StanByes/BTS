@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <label for="date" class="form-label">Date de naissance</label>
+                        <label for="birthday" class="form-label">Date de naissance</label>
                         <input type="date" id="birthday" name="birthday" class="form-control">
                     </div>
 
@@ -68,6 +68,11 @@
                                     <option value="<?= $i ?>"><?= $i ?></option>
                                 <?php } ?>
                         </select>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="tel" class="form-label">Numéro de téléphone (optionnel)</label>
+                        <input type="tel" id="tel" name="tel" class="form-control">
                     </div>
 
                     <div class="d-flex justify-content-center mt-5">

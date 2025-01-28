@@ -2,15 +2,21 @@
 include "../_conf.php";
 
 if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
-    if (empty($_POST['login']) || empty($_POST['password'])) {
+    if (empty($_POST['login']) || empty($_POST['password']) || empty($_POST['code'])) {
         echo "Merci de remplir tous les champs ! <br> <a href='./index.php'>Retour à la page de connexion</a>";
         return;
     }
 
     $login = $_POST['login'];
     $password = $_POST['password'];
+    $code = $_POST['code'];
 
-    $query = $connection->prepare("SELECT `id`, `nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC` FROM `ADHERENT` WHERE `login` = ?");
+    if (strlen($code) != 5) {
+        echo "Le code doit être composé de 5 chiffres ! <br> <a href='./index.php'>Retour à la page de connexion</a>";
+        return;
+    }
+
+    $query = $connection->prepare("SELECT `id`, `nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC`, `tel` FROM `ADHERENT` WHERE `login` = ?");
     $query->bind_param('s', $login);
 
     if ($query->execute()) {
@@ -25,7 +31,32 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
             if (!password_verify($password, $accountPass)) {
                 echo "Mauvais couple login/password ! <br> <a href='./index.php'>Retour à la page de connexion</a>";
                 return;
-            } ?>
+            }
+
+            $codeQuery = $connection->prepare("SELECT `code` FROM `CODE`");
+
+            $goodCode = false;
+            if ($codeQuery->execute()) {
+                if ($result = $codeQuery->get_result()) {
+                    $codeData = $result->fetch_assoc();
+                    if (!isset($data)) {
+                        echo "Erreur Interne ! Aucun code défini dans la base de données ! <br> <a href='./index.php'>Retour à la page de connexion</a>";
+                        return;
+                    }
+
+                    $codeInBase = $codeData["code"];
+                    $goodCode = $codeInBase == $code;
+                }
+            } else {
+                echo "Erreur de récupération de données : " . $query->error;
+            }
+
+            if (!$goodCode) {
+                echo "Code Invalide ! <br> <a href='./index.php'>Retour à la page de connexion</a>";
+                return;
+            }
+
+            ?>
             <html>
                 <head>
                     <meta charset='utf-8'>
@@ -102,6 +133,10 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
                                                 <option value="<?= $i ?>" <?= $data["Annee_BAC"] == $i ? "selected" : "" ?>><?= $i ?></option>
                                             <?php } ?>
                                     </select>
+                                </div>
+
+                                <div class="mt-4">
+                                    <p><strong>Numéro de téléphone : </strong> <?= isset($data["tel"]) ? $data["tel"] : "Non renseigné" ?></p>
                                 </div>
 
                                 <div class="d-flex justify-content-center mt-5">

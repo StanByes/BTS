@@ -17,12 +17,17 @@
                 <form action="./index2.php" method="POST">
                     <div class="form-group mt-4">
                         <label for="login" class="form-label">Login</label>
-                        <input type="text" id="login" name="login" class="form-control">
+                        <input type="text" id="login" name="login" class="form-control" required="required">
                     </div>
 
                     <div class="form-group mt-4">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control" required="required">
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="code" class="form-label">Code à 5 chiffre</label>
+                        <input type="number" min="0" max="99999" id="code" name="code" class="form-control" required="required">
                     </div>
 
                     <div class="d-flex justify-content-center mt-5">

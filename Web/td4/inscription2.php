@@ -2,8 +2,8 @@
 include "../_conf.php";
 
 $values = array();
-foreach (array('name', 'firstname', 'email', 'login', 'password', 'verif_password', 'birthday', 'gender', 'bac') as $v) {
-    if (empty($_POST[$v])) {
+foreach (array('name', 'firstname', 'email', 'login', 'password', 'verif_password', 'birthday', 'gender', 'bac', 'tel') as $v) {
+    if (empty($_POST[$v]) && $v !== 'tel') {
         echo "Le champ $v est vide ! Merci de remplir tous les champs. <br> <a href='./inscription.php'>Revenir à la page d'inscription</a>";
         return;
     }
@@ -12,7 +12,11 @@ foreach (array('name', 'firstname', 'email', 'login', 'password', 'verif_passwor
         $_POST['gender'] = $_POST['gender'] == 'man' ? 0 : 1;
 
     if ($v !== 'verif_password')
-        array_push($values, $v == 'password' ? password_hash($_POST[$v], PASSWORD_BCRYPT) : $_POST[$v]);
+        $values[] = $v == 'password'
+            ? password_hash($_POST[$v], PASSWORD_BCRYPT)
+            : ($v == 'tel' && empty($_POST[$v])
+                ? null
+                : $_POST[$v]);
 }
 
 if ($_POST['password'] !== $_POST['verif_password']) {
@@ -23,8 +27,8 @@ if ($_POST['password'] !== $_POST['verif_password']) {
 if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
     echo "Connecté à la base de données !<br>";
 
-    $query = $connection->prepare("INSERT INTO `ADHERENT`(`nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $query->bind_param("ssssssii", ...$values);
+    $query = $connection->prepare("INSERT INTO `ADHERENT`(`nom`, `prenom`, `email`, `login`, `password`, `dateNaissance`, `Sexe`, `Annee_BAC`, `tel`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->bind_param("ssssssiis", ...$values);
     
     if ($query->execute()) {
         echo "Inscription effectuée avec succès ! <br> <a href='./index.php'>Page de connexion</a>";
