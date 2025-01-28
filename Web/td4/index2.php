@@ -56,6 +56,26 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
                 return;
             }
 
+            $queryCount = $connection->prepare("SELECT `Sexe`, `login`, `Annee_BAC` FROM `ADHERENT`");
+
+            $allUsers = $queryCount->execute();
+            $allUsers = $queryCount->get_result()->fetch_all();
+
+            $count = count($allUsers);
+            $menCount = count(array_filter($allUsers, function($v) {
+                return $v[0] == 0;
+            }));
+            $womenCount = count(array_filter($allUsers, function($v) {
+                return $v[0] == 1;
+            }));
+
+            usort($allUsers, function($v1, $v2) {
+                if (!isset($v1[2]) || !isset($v2[2]))
+                    return intval($v1[2]) < intval($v2[2]);
+
+                return intval($v1[2]) > intval($v2[2]);
+            });
+
             ?>
             <html>
                 <head>
@@ -68,8 +88,29 @@ if ($connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName)) {
                 <body>
                     <h1 class="text-center">Stackfindover</h1>
 
-                    <div class="card mt-5 m-auto w-25 shadow p-3 mb-5 bg-body rounded">
+                    <div class="card mt-5 m-auto w-50 shadow p-3 mb-5 bg-body rounded">
                         <div class="card-body">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <td class="bg-warning">NB Utilisateurs</td>
+                                        <td class="bg-warning">NB Hommes</td>
+                                        <td class="bg-warning">NB Femmes</td>
+                                        <td class="bg-warning">Login</td>
+                                        <td class="bg-warning">Année du BAC</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?= $count ?></td>
+                                        <td><?= $menCount ?></td>
+                                        <td><?= $womenCount ?></td>
+                                        <td><?= $allUsers[0][1] ?></td>
+                                        <td><?= $allUsers[0][2] ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                             <h1 class="text-center">PARTIE <?= $data['type'] == 'prof' ? "PROF" : "ELEVE" ?></h1>
                             <span>Mettre à jour vos informations</span>
 
