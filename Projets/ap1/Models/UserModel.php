@@ -66,6 +66,22 @@ class UserModel extends BaseModel
         return $prepare->execute();
     }
 
+    public static function getWithoutReportBySupervisor($supervisor): array
+    {
+        $q = "SELECT `users`.* FROM `users`, `internships`
+        WHERE `users`.`id` NOT IN (SELECT `reports`.`creator_id` FROM `reports`)
+        AND `internships`.`supervisor_id` = ?
+        AND `internships`.`intern_id` = `users`.`id`;";
+
+        $rows = self::executeSelect($q, [$supervisor->getId()]);
+        $result = array();
+        foreach ($rows as $row) {
+            $result[] = self::createObject($row);
+        }
+
+        return $result;
+    }
+
     protected static function createObject($data): User
     {
         return new User(

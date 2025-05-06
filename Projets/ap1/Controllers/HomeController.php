@@ -19,6 +19,8 @@ class HomeController extends AppController
         $totalReports = 0;
         $reportsCountByUsers = array();
 
+        $withoutReportCount = 0;
+
         if ($user->getRole()->getName() == "supervisor") {
             $internships = InternshipModel::getAllInternsBySupervisor($user);
             if (empty($_GET["user"])) {
@@ -36,6 +38,7 @@ class HomeController extends AppController
 
                 $reports = ReportModel::getReportsByUser($searchedUser);
             }
+            $withoutReportCount = UserModel::getWithoutReportBySupervisor($user);
         } elseif ($user->getRole()->getName() == "gestion") {
             $users = UserModel::getAllUsers();
             $totalReports = ReportModel::getReportsCount();
@@ -57,7 +60,8 @@ class HomeController extends AppController
             "specificUser",
             "users",
             "totalReports",
-            "reportsCountByUsers"
+            "reportsCountByUsers",
+            "withoutReportCount"
         ));
     }
 }

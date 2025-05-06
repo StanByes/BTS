@@ -5,6 +5,9 @@
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#create">Liste de vos stagiaires</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#stats">Statistiques</a>
+    </li>
 </ul>
 
 <div class="tab-content mt-5">
@@ -64,5 +67,24 @@
                 </div>
             </div>
         <?php } ?>
+    </div>
+
+    <div class="tab-pane container active" id="stats">
+        <div class="card mb-3">
+            <div class="card-body">
+                <p>
+                    <strong>Nombre d'élèves à votre charge :</strong>
+                    <?= count($internships) ?>
+                </p>
+                <p>
+                    <strong>Élèves sans compte rendu :</strong>
+                    <ul>
+                        <?php foreach($withoutReportCount as $user) { ?>
+                            <li><?= $user->getFirstname() . " " . $user->getSurname() ?></li>
+                        <?php } ?>
+                    </ul>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
