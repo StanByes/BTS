@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 public abstract class BasePopup extends JPanel {
 	protected BasePopup(String title) {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		
+
 		setBounds(screen.width / 4, screen.height / 4, screen.width / 2, screen.height / 2);
 		setLayout(null);
 		setBackground(Color.white);
@@ -36,8 +36,11 @@ public abstract class BasePopup extends JPanel {
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Screen.closePopup();
+                onClose();
 			}
 		});
 		add(close);
 	}
+
+    abstract void onClose();
 }

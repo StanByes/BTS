@@ -28,14 +28,14 @@ public class CreationPopup extends BasePopup {
 
 	public CreationPopup() {
 		super("Ajouter un " + Main.getCurrentMode().getDisplayName().toLowerCase().substring(0, Main.getCurrentMode().getDisplayName().length() - 1));
-		
+
 		JLabel info = new JLabel("Veuillez remplir tous les champs !");
 		info.setBackground(Color.red);
 		info.setForeground(Color.white);
 		info.setBounds(0, 50, getWidth(), 20);
 		info.setFont(new Font("Tahoma", Font.ITALIC, 18));
 		info.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		JButton create = new JButton("Créer");
 		create.setBackground(new Color(0, 100, 255));
 		create.setBounds(getWidth() / 4, getHeight() - 75, getWidth() / 2, 50);
@@ -54,7 +54,17 @@ public class CreationPopup extends BasePopup {
 			nameField.setFont(fieldFont);
 			nameField.setBounds(15, 95, 300, 25);
 			add(nameField);
-			
+
+            JLabel isbnLabel = new JLabel("ISBN :");
+            isbnLabel.setFont(labelFont);
+            isbnLabel.setBounds(320, 75, 250, 20);
+            add(isbnLabel);
+
+            JTextField isbnField = new JTextField();
+            isbnField.setFont(fieldFont);
+            isbnField.setBounds(320, 95, 300, 25);
+            add(isbnField);
+
 			JLabel authorLabel = new JLabel("Auteur(e) :");
 			authorLabel.setFont(labelFont);
 			authorLabel.setBounds(15, 135, 250, 20);
@@ -64,8 +74,7 @@ public class CreationPopup extends BasePopup {
 			authorField.setFont(fieldFont);
 			authorField.setBounds(15, 155, 300, 25);
 			add(authorField);
-			add(nameField);
-			
+
 			JLabel totalLabel = new JLabel("Nombre de livres :");
 			totalLabel.setFont(labelFont);
 			totalLabel.setBounds(15, 195, 250, 20);
@@ -75,7 +84,7 @@ public class CreationPopup extends BasePopup {
 			totalField.setFont(fieldFont);
 			totalField.setBounds(15, 215, 300, 25);
 			add(totalField);
-			
+
 			JLabel publishedLabel = new JLabel("Date de publication (optionnelle | Au format 01/01/2024) :");
 			publishedLabel.setFont(labelFont);
 			publishedLabel.setBounds(15, 255, 500, 20);
@@ -90,14 +99,15 @@ public class CreationPopup extends BasePopup {
 				public void actionPerformed(ActionEvent e) {
 					String name = nameField.getText();
 					String author = authorField.getText();
-					
-					if (name.isEmpty() || author.isEmpty() || totalField.getText().isEmpty() || publishedField.getText().isEmpty()) {
+                    String isbn = isbnField.getText();
+
+					if (name.isEmpty() || author.isEmpty() || isbn.isEmpty() || totalField.getText().isEmpty() || publishedField.getText().isEmpty()) {
 						// DO NOTHING
 					} else {
 						long total = (long) totalField.getValue();
 						Date publishedDate = (Date) publishedField.getValue();
-						
-						Book book = new Book(name, author, Math.toIntExact(total), new java.sql.Date(publishedDate.getTime()));
+
+						Book book = new Book(name, author, isbn, Math.toIntExact(total), new java.sql.Date(publishedDate.getTime()));
 						try {
 							book.setId(BookModel.createBook(book));
 						} catch (SQLException exception) {
@@ -107,10 +117,10 @@ public class CreationPopup extends BasePopup {
 							repaint();
 							return;
 						}
-						
+
 						Main.getBooks().add(book);
 						Screen.setModelList();
-						
+
 						Screen.closePopup();
 					}
 				}
@@ -135,12 +145,12 @@ public class CreationPopup extends BasePopup {
 			firstNameField.setFont(fieldFont);
 			firstNameField.setBounds(15, 155, 300, 25);
 			add(firstNameField);
-			
+
 			JLabel birthdayLabel = new JLabel("Date de naissance (Au format 01/01/2024) :");
 			birthdayLabel.setFont(labelFont);
 			birthdayLabel.setBounds(15, 195, 400, 20);
 			add(birthdayLabel);
-			
+
 			JFormattedTextField birthdayField = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
 			birthdayField.setFont(fieldFont);
 			birthdayField.setBounds(15, 215, 300, 25);
@@ -165,19 +175,19 @@ public class CreationPopup extends BasePopup {
 			phoneField.setFont(fieldFont);
 			phoneField.setBounds(330, 95, 300, 25);
 			add(phoneField);
-			
+
 			create.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String surname = surNameField.getText();
 					String firstname = firstNameField.getText();
 					String email = emailField.getText();
 					String phone = phoneField.getText();
-					
+
 					if (surname.isEmpty() || firstname.isEmpty() || birthdayField.getText().isEmpty()) {
 						// DO NOTHING
 					} else {
 						Date birthday = (Date) birthdayField.getValue();
-						
+
 						Client client = new Client(firstname, surname, new java.sql.Date(birthday.getTime()), email, phone);
 						try {
 							client.setId(ClientModel.createClient(client));
@@ -188,14 +198,19 @@ public class CreationPopup extends BasePopup {
 							repaint();
 							return;
 						}
-						
+
 						Main.getClients().add(client);
 						Screen.setModelList();
-						
+
 						Screen.closePopup();
 					}
 				}
 			});
 		}
 	}
+
+    @Override
+    void onClose() {
+        // IGNORED
+    }
 }

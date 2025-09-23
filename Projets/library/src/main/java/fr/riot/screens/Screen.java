@@ -35,11 +35,12 @@ public class Screen {
 
 	private static JButton switcher;
 	private static JButton reservations;
+	private static JButton giveBack;
 	private static JButton createReservation;
 	private static JButton create;
-	
+
 	private static BasePopup popup;
-	
+
 	public Screen() {
 		initialize();
 	}
@@ -51,7 +52,7 @@ public class Screen {
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		layeredPane = new JLayeredPane();
 		frame.getContentPane().add(layeredPane);
 
@@ -69,6 +70,16 @@ public class Screen {
 		});
 		reservations.setBounds(screen.width / 4, 11, 150, 23);
 		contentPane.add(reservations);
+
+        giveBack = new JButton("Rendre un livre");
+        giveBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openPopup(new ScannerPopup());
+            }
+        });
+        giveBack.setBounds(screen.width / 2 - 50, 11, 150, 23);
+        contentPane.add(giveBack);
 
 		createReservation = new JButton("Emprunter");
 		createReservation.addActionListener(new ActionListener() {
@@ -103,7 +114,7 @@ public class Screen {
 					Main.setCurrentMode(Mode.CLIENTS);
 				else
 					Main.setCurrentMode(Mode.BOOKS);
-				
+
 				setModelList();
 
 				String name = Main.getCurrentMode().getDisplayName();
@@ -124,7 +135,7 @@ public class Screen {
 		layeredPane.add(contentPane, JLayeredPane.DEFAULT_LAYER);
 		frame.setVisible(true);
 	}
-	
+
 	public static void setModelList() {
 		if (list == null) {
 			defaultListModel = new DefaultListModel<>();
@@ -146,26 +157,28 @@ public class Screen {
 				defaultListModel.addElement(client);
 		}
 	}
-	
+
 	public static void openPopup(BasePopup popup) {
 		switcher.setEnabled(false);
 		create.setEnabled(false);
 		reservations.setEnabled(false);
+        giveBack.setEnabled(false);
 		createReservation.setEnabled(false);
 
 		Screen.popup = popup;
-		
+
 		layeredPane.add(popup, JLayeredPane.POPUP_LAYER);
 		layeredPane.revalidate();
 		layeredPane.repaint();
 	}
-	
+
 	public static void closePopup() {
 		switcher.setEnabled(true);
 		create.setEnabled(true);
 		reservations.setEnabled(true);
+        giveBack.setEnabled(true);
 		createReservation.setEnabled(true);
-		
+
 		layeredPane.remove(popup);
 		layeredPane.revalidate();
 		layeredPane.repaint();

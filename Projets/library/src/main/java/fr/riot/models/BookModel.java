@@ -11,8 +11,8 @@ import fr.riot.Main;
 import fr.riot.classes.Book;
 
 public class BookModel {
-    private static final String GET_ALL_BOOKS = "SELECT `id`, `name`, `author`, `total`, `published_at` FROM `books`";
-    private static final String CREATE_BOOK = "INSERT INTO `books`(`name`, `author`, `total`, `published_at`) VALUES (?, ?, ?, ?)";
+    private static final String GET_ALL_BOOKS = "SELECT `id`, `name`, `author`, `isbn`, `total`, `published_at` FROM `books`";
+    private static final String CREATE_BOOK = "INSERT INTO `books`(`name`, `author`, `isbn`, `total`, `published_at`) VALUES (?, ?, ?, ?, ?)";
 
     public static List<Book> getAllBooks() throws SQLException {
         List<Book> books = new ArrayList<>();
@@ -20,7 +20,7 @@ public class BookModel {
         try (PreparedStatement preparedStatement = Main.getConnection().getConnection().prepareStatement(GET_ALL_BOOKS)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next())
-                    books.add(new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4), resultSet.getDate(5)));
+                    books.add(new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDate(6)));
             }
         } finally {
             Main.getConnection().releaseConnection();
@@ -33,9 +33,10 @@ public class BookModel {
     	try (PreparedStatement preparedStatement = Main.getConnection().getConnection().prepareStatement(CREATE_BOOK, Statement.RETURN_GENERATED_KEYS)) {
     		preparedStatement.setString(1, book.getName());
     		preparedStatement.setString(2, book.getAuthor());
-    		preparedStatement.setLong(3, book.getTotal());
-    		preparedStatement.setDate(4, book.getPublishedAt());
-    		
+            preparedStatement.setString(3, book.getIsbn());
+    		preparedStatement.setLong(4, book.getTotal());
+    		preparedStatement.setDate(5, book.getPublishedAt());
+
     		preparedStatement.executeUpdate();
     		try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
     			if (resultSet.next())

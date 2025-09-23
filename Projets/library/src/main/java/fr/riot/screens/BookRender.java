@@ -32,10 +32,10 @@ public class BookRender implements ListCellRenderer<Book> {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel info = new JLabel(value.getName() + " - " + value.getAuthor());
+        JLabel info = new JLabel(value.getName() + " - " + value.getAuthor() + " - " + value.getIsbn());
         info.setBounds(5, 0, listW - 100, 20);
         panel.add(info);
-        
+
         JLabel publishedDate = new JLabel("Publié le " + formatDate(value.getPublishedAt()));
         publishedDate.setBounds(5, 20, listW - 100, 20);
         panel.add(publishedDate);
@@ -43,7 +43,7 @@ public class BookRender implements ListCellRenderer<Book> {
         JLabel total = new JLabel("Total : " + value.getTotal());
         total.setBounds(listW - 125, 10, 125, 20);
         panel.add(total);
-        
+
         int availableBooks = Utils.getAvailableBooks(value);
         JLabel available = new JLabel("Disponible : " + (availableBooks == 0 ? "Aucun" : availableBooks));
         available.setBounds(listW - 125, 30, 125, 20);
@@ -51,10 +51,10 @@ public class BookRender implements ListCellRenderer<Book> {
 
     	panel.setBackground(availableBooks == 0 ? Color.red : Color.green);
         panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
-        
+
         return panel;
 	}
-	
+
 	public String formatDate(Date date) {
 		return formatter.format(date);
 	}

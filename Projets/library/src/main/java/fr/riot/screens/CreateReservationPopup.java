@@ -18,6 +18,7 @@ import fr.riot.classes.Book;
 import fr.riot.classes.Client;
 import fr.riot.classes.Reservation;
 import fr.riot.models.ReservationModel;
+import fr.riot.utils.QRUtils;
 import fr.riot.utils.ScreenUtils;
 import fr.riot.utils.Utils;
 
@@ -25,7 +26,7 @@ public class CreateReservationPopup extends BasePopup {
 
 	protected CreateReservationPopup() {
 		super("Emprunter un livre");
-		
+
 		JPanel reservationsList = new JPanel();
 		reservationsList.setLayout(null);
 		reservationsList.setBackground(Color.gray);
@@ -33,7 +34,7 @@ public class CreateReservationPopup extends BasePopup {
 		JScrollPane scrollPane = new JScrollPane(reservationsList);
 		scrollPane.setBounds(25, getHeight() - 200, getWidth() - 50, getHeight() - 200);
 		add(scrollPane);
-		
+
 		JComboBox<String> booksList = ScreenUtils.createBooksList();
 		booksList.setBounds(getWidth() / 4, getHeight() / 4, getWidth() / 2, 30);
 		booksList.addActionListener(new ActionListener() {
@@ -46,7 +47,7 @@ public class CreateReservationPopup extends BasePopup {
 					reservationsList.setBackground(Color.gray);
 				} else {
 					reservationsList.setBackground(new Color(200, 200, 200));
-					
+
 					Book book = Main.getBooks().get(index - 1);
 					if (book != null) {
 						int i = 0;
@@ -58,21 +59,20 @@ public class CreateReservationPopup extends BasePopup {
 									break;
 								}
 							}
-							
+
 							if (skip)
 								continue;
-							
 
 							JPanel reservationEntry = new JPanel();
 							reservationEntry.setLayout(null);
 							reservationEntry.setBounds(0, i * 30, scrollPane.getWidth(), 30);
 							reservationEntry.setBackground(new Color(230, 230, 230));
 							reservationEntry.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
-							
+
 							JLabel clientName = new JLabel(client.getFirstName() + " " + client.getSurName());
 							clientName.setBounds(10, reservationEntry.getHeight() / 2 - 10, 100, 20);
 							reservationEntry.add(clientName);
-							
+
 							JButton add = new JButton("\u2705");
 							add.setBounds(reservationEntry.getWidth() - 40, reservationEntry.getHeight() / 2 - 10, 30, 20);
 							add.setForeground(Color.green);
@@ -87,11 +87,13 @@ public class CreateReservationPopup extends BasePopup {
 									} catch (SQLException exception) {
 										throw new RuntimeException(exception);
 									}
-									
+
 									Main.getReservations().add(reservation);
+                                    QRUtils.generateAndSaveReservation(reservation);
+
 									if (Main.getCurrentMode().equals(Main.Mode.BOOKS))
 										Screen.setModelList();
-									
+
 									reservationsList.remove(reservationEntry);
 									reservationsList.revalidate();
 									reservationsList.repaint();
@@ -99,10 +101,10 @@ public class CreateReservationPopup extends BasePopup {
 							});
 							reservationEntry.add(add);
 							reservationsList.add(reservationEntry);
-							
+
 							i++;
 						}
-						
+
 						if (reservationsList.getComponentCount() > 0)
 							((JPanel) reservationsList.getComponent(i - 1)).setBorder(BorderFactory.createEmptyBorder());
 					}
@@ -115,4 +117,8 @@ public class CreateReservationPopup extends BasePopup {
 		add(booksList);
 	}
 
+    @Override
+    void onClose() {
+        // IGNORED
+    }
 }
