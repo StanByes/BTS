@@ -1,0 +1,39 @@
+package fr.riot.ap2.models;
+
+import fr.riot.ap2.entities.Author;
+import fr.riot.ap2.entities.Book;
+import fr.riot.ap2.entities.Client;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Model {
+    private static List<Author> authors = new ArrayList<>();
+    private static List<Book> books = new ArrayList<>();
+    private static List<Client> clients = new ArrayList<>();
+
+    public static List<Author> getAuthors() {
+        return authors;
+    }
+    public static List<Book> getBooks() {
+        return books;
+    }
+    public static List<Client> getClients() {
+        return clients;
+    }
+
+    public static void load() {
+        authors.clear();
+        books.clear();
+        clients.clear();
+
+        try {
+            authors = AuthorModel.getAuthors();
+            clients = ClientModel.getClients();
+            books = BookModel.getBooks();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+}
