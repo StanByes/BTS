@@ -60,6 +60,9 @@
                 </div>
             </div>
 
+            <?php
+            if (isset($internship)) {
+                ?>
             <hr>
 
             <div class="row">
@@ -78,18 +81,22 @@
                 <div class="form-group col-6 mb-3">
                     <label class="form-label" for="day_start_at">Heure de début de la journée :</label>
                     <input type="time" class="form-control" name="day_start_at" id="day_start_at"
-                        <?= $internship->getDayStartAt() !== null
-                            ? "value='" . formatTimeForElement($internship->getDayStartAt(), false) . "'"
-                            : "" ?>">
+                       <?= $internship->getDayStartAt() !== null
+                           ? "value='" . formatTimeForElement($internship->getDayStartAt(), false) . "'"
+                           : "" ?>">
                 </div>
 
                 <div class="form-group col-6 mb-3">
                     <label class="form-label" for="day_end_at">Heure de fin de la journée :</label>
                     <input type="time" class="form-control" name="day_end_at" id="day_end_at"
                         <?= $internship->getDayEndAt() !== null
-                            ? "value='" . formatTimeForElement($internship->getDayEndAt(), false) . "'"
-                            : "" ?>">
+                           ? "value='" . formatTimeForElement($internship->getDayEndAt(), false) . "'"
+                           : "" ?>">
                 </div>
+
+                <?php
+            }
+            ?>
 
                 <div class="d-flex justify-content-center mt-4">
                     <button class="btn btn-success w-75">Valider</button>

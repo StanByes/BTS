@@ -1,11 +1,12 @@
 <?php
 namespace App\Controllers;
 
+use App\Entities\User;
 use App\Models\InternshipModel;
 
 abstract class AppController
 {
-    protected static function getUser()
+    protected static function getUser(): User
     {
         return unserialize($_SESSION["user"]);
     }
@@ -32,5 +33,10 @@ abstract class AppController
     protected static function flash($error, $message): void
     {
         $_SESSION["flash"] = ["error" => $error, "message" => $message];
+    }
+
+    public static function testPassword()
+    {
+        self::render("debug/test_password");
     }
 }

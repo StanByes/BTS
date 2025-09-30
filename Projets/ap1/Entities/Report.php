@@ -52,4 +52,19 @@ class Report
     {
         return $this->createdAt;
     }
+
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
+    public function setDate($date): void
+    {
+        $this->date = $date;
+    }
 }

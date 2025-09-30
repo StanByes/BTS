@@ -69,7 +69,7 @@
         <?php } ?>
     </div>
 
-    <div class="tab-pane container active" id="stats">
+    <div class="tab-pane container fade" id="stats">
         <div class="card mb-3">
             <div class="card-body">
                 <p>
@@ -78,11 +78,18 @@
                 </p>
                 <p>
                     <strong>Élèves sans compte rendu :</strong>
-                    <ul>
-                        <?php foreach($withoutReportCount as $user) { ?>
-                            <li><?= $user->getFirstname() . " " . $user->getSurname() ?></li>
+                    <?php
+                        if (count($withoutReportCount) == 0) { ?>
+                            Aucun
+                        <?php
+                        } else { ?>
+                            <ul>
+                                <?php
+                                    foreach($withoutReportCount as $user) { ?>
+                                        <li><?= $user->getFirstname() . " " . $user->getSurname() ?></li>
+                                <?php } ?>     
+                            </ul>
                         <?php } ?>
-                    </ul>
                 </p>
             </div>
         </div>

@@ -5,7 +5,7 @@ use App\Entities\User;
 
 class UserModel extends BaseModel
 {
-    private static array $atr = ["id", "firstname", "surname", "login", "mail", "password", "role_id"];
+    private static array $atr = ["id", "firstname", "surname", "login", "mail", "password", "status", "role_id"];
 
     public static function getAllUsers(): array
     {
@@ -82,6 +82,22 @@ class UserModel extends BaseModel
         return $result;
     }
 
+    public static function createUser($firstname, $surname, $login, $email, $password, $role): bool
+    {
+        $q = "INSERT INTO `users`(`firstname`, `surname`, `login`, `mail`, `password`, `status`, `role_id`)
+            VALUES (?, ?, ?, ?, ?, 0, ?)";
+
+        $prepare = self::getConnection()->prepare($q);
+        $prepare->bindParam(1, $firstname);
+        $prepare->bindParam(2, $surname);
+        $prepare->bindParam(3, $login);
+        $prepare->bindParam(4, $email);
+        $prepare->bindParam(5, $password);
+        $prepare->bindParam(6, $role->getId());
+
+        return $prepare->execute();
+    }
+
     protected static function createObject($data): User
     {
         return new User(
@@ -91,6 +107,7 @@ class UserModel extends BaseModel
             $data["login"],
             $data["mail"],
             $data["password"],
+            $data["status"],
             RoleModel::getRoleById($data["role_id"])
         );
     }
@@ -98,5 +115,43 @@ class UserModel extends BaseModel
     public static function verifyPassword($password, $hashed_password): bool
     {
         return password_verify($password, $hashed_password);
+    }
+
+    public static function checkPasswordSecurity($password): bool
+    {
+        if (strlen($password) <= 10) {
+            return false;
+        }
+
+        $has_upper = false;
+        $has_lower = false;
+        $has_numeric = false;
+        $has_special_char = false;
+        foreach (str_split($password) as $c) {
+            if (is_numeric($c)) {
+                $has_numeric = true;
+                continue;
+            }
+
+            if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $c)) {
+                $has_special_char = true;
+                continue;
+            }
+
+            if (strtoupper($c) === $c) {
+                $has_upper = true;
+                continue;
+            }
+
+            if (strtolower($c) === $c) {
+                $has_lower = true;
+            }
+        }
+
+        if (!$has_upper || !$has_lower || !$has_numeric || !$has_special_char) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -13,6 +13,9 @@ foreach ($reports as $report) {?>
                         </p>
                     <?php
                 } else { ?>
+                        <a class="btn btn-warning" href="?action=edit_report&report_id=<?= $report->getId() ?>">
+                            Éditer
+                        </a>
                         <p class="text-center">Posté le <?= formatDateTime($report->getCreatedAt()) ?></p>
                 <?php } ?>
             </div>

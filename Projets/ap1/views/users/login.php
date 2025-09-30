@@ -16,8 +16,14 @@ ob_start();
         <input id="password" class="form-control" type="password" name="password" required="required">
     </div>
 
-    <div class="mb-2">
-        <a class="text-decoration-none" href="./?action=reset_password_query">Mot de passe oublié ?</a>
+    <div class="d-flex justify-content-around">
+        <div class="mb-2">
+            <a class="text-decoration-none" href="./?action=reset_password_query">Mot de passe oublié ?</a>
+        </div>
+
+        <div class="mb-2">
+            <a class="text-decoration-none" href="./?action=sign">Pas encore inscrit ?</a>
+        </div>
     </div>
 
     <div class="d-flex justify-content-center mt-4">

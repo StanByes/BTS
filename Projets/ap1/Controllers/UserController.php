@@ -1,8 +1,11 @@
 <?php
 namespace App\Controllers;
 
+use App\Entities\Role;
+use App\Entities\User;
 use App\Models\InternshipModel;
 use App\Models\ResetPasswordQueryModel;
+use App\Models\RoleModel;
 use App\Models\UserModel;
 use http\Exception\RuntimeException;
 use JetBrains\PhpStorm\NoReturn;
@@ -42,6 +45,12 @@ class UserController extends AppController
                 die();
             }
 
+            if (!$account->isActive()) {
+                self::flash(true, "Votre compte est en cours de validation...");
+                header("Location: ./?action=login");
+                die();
+            }
+
             $_SESSION['user'] = serialize($account);
             self::flash(false, "Connecté avec succès");
 
@@ -50,6 +59,55 @@ class UserController extends AppController
         }
 
         AppController::render("users/login");
+    }
+
+    public static function sign(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $firstname = strip_tags($_POST['firstname']);
+            $surname = strip_tags($_POST['surname']);
+            $login = strip_tags($_POST['login']);
+            $email = strip_tags($_POST['email']);
+            $password = strip_tags($_POST['password']);
+
+            if (empty($firstname) || empty($surname) || empty($email) || empty($login) || empty($password)) {
+                self::flash(true, "Veuillez remplir tous les champs");
+                header("Location: ./?action=sign");
+                die();
+            }
+
+            $account_by_login = UserModel::getUser($login, false);
+            if (isset($account_by_login)) {
+                self::flash(true, "Ce nom d'utilisateur est déjà utilisé");
+                header("Location: ./?action=sign");
+                die();
+            }
+
+            $account_by_mail = UserModel::getUser($email, true);
+            if (isset($account_by_mail)) {
+                self::flash(true, "Cette adresse mail est déjà utilisée");
+                header("Location: ./?action=sign");
+                die();
+            }
+
+            if (!UserModel::checkPasswordSecurity($password)) {
+                self::flash(true, "Le mot de passe doit être plus robuste
+                (+ de 10 caractères, majuscules, minuscules, chiffres, symboles)");
+                header("Location: ./?action=sign");
+                die();
+            }
+
+            UserModel::createUser($firstname, $surname, $login,
+                $email, password_hash($password, PASSWORD_DEFAULT), RoleModel::getRoleByName("intern"));
+            self::flash(false, "Inscription validée");
+            header("Location: ./?action=login");
+            die();
+        }
+
+        $supervisors = array_filter(UserModel::getAllUsers(), function ($user) {
+            return $user->getRole()->getName() == "supervisor";
+        });
+        self::render("users/sign", compact("supervisors"));
     }
 
     #[NoReturn] public static function logout(): void

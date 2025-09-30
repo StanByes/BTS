@@ -40,6 +40,21 @@ class ReportModel extends BaseModel
         return $result;
     }
 
+    public static function getReportById($reportId): Report | null
+    {
+        $q = "SELECT " . self::map(self::$atr) . " FROM `reports` WHERE `id` = ?";
+        $rows = self::executeSelect($q, [$reportId]);
+        if (count($rows) == 0) {
+            return null;
+        }
+
+        try {
+            return self::createObject($rows[0]);
+        } catch (DateMalformedStringException $exception) {
+            throw new RuntimeException($exception);
+        }
+    }
+
     public static function createReport($report): bool
     {
         $atr = ["creator_id", "title", "content", "date", "created_at"];
@@ -50,6 +65,24 @@ class ReportModel extends BaseModel
         $prepare->bindParam(2, $report->getTitle());
         $prepare->bindParam(3, $report->getContent());
         $prepare->bindParam(4, $report->getDate()->format("Y-m-d"));
+
+        return $prepare->execute();
+    }
+
+    public static function updateReport($report): bool
+    {
+        $q = "UPDATE `reports` SET `title` = ?, `content` = ?, `date` = ? WHERE `id` = ?";
+        $prepare = self::getConnection()->prepare($q);
+
+        $title = $report->getTitle();
+        $content = $report->getContent();
+        $date = $report->getDate()->format("Y-m-d");
+        $id = $report->getId();
+
+        $prepare->bindParam(1, $title);
+        $prepare->bindParam(2, $content);
+        $prepare->bindParam(3, $date);
+        $prepare->bindParam(4, $id);
 
         return $prepare->execute();
     }

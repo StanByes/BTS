@@ -17,6 +17,17 @@ class RoleModel extends BaseModel
         return self::createObject($rows[0]);
     }
 
+    public static function getRoleByName($name): Role | null
+    {
+        $q = "SELECT " . self::map(["id", "name", "display_name"]) . " FROM `roles` WHERE `name` = ?";
+        $rows = self::executeSelect($q, [$name]);
+        if (count($rows) == 0) {
+            return null;
+        }
+
+        return self::createObject($rows[0]);
+    }
+
     protected static function createObject($data): Role
     {
         return new Role(

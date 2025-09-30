@@ -10,9 +10,10 @@ class User
     private string $login;
     private string $mail;
     private string $password;
+    private bool $status;
     private Role $role;
 
-    public function __construct($id, $firstname, $surname, $login, $mail, $password, $role)
+    public function __construct($id, $firstname, $surname, $login, $mail, $password, $status, $role)
     {
         $this->id = $id;
         $this->firstname = $firstname;
@@ -20,6 +21,7 @@ class User
         $this->login = $login;
         $this->mail = $mail;
         $this->password = $password;
+        $this->status = $status;
         $this->role = $role;
     }
 
@@ -61,5 +63,10 @@ class User
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status == 1;
     }
 }
