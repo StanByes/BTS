@@ -1,6 +1,5 @@
 package fr.riot.ap2.views;
 
-import fr.riot.ap2.Main;
 import fr.riot.ap2.components.BookList;
 import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.entities.Book;
