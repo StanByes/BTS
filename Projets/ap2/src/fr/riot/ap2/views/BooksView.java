@@ -1,5 +1,8 @@
 package fr.riot.ap2.views;
 
+import fr.riot.ap2.Main;
+import fr.riot.ap2.components.BookList;
+import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.entities.Book;
 
 import javax.swing.*;
@@ -18,17 +21,14 @@ public class BooksView extends JPanel {
         JLabel title = new JLabel("Liste des livres");
         title.setBounds(600, 25, 450, 20);
         title.setFont(new Font("Serif", Font.BOLD, 25));
+
         add(title);
+        add(new BookList(books, 25, 150, 1315, 500));
 
-        JList<String> bookList = new JList<>();
-        bookList.setFixedCellHeight(30);
-        DefaultListModel<String> bookListModel = new DefaultListModel<>();
-        for (Book book : books)
-            bookListModel.addElement(book.getName() + " - " + book.getAuthor().getFullName() + " (" + book.getISBN() + ")");
-        bookList.setModel(bookListModel);
-
-        JScrollPane scrollPane = new JScrollPane(bookList);
-        scrollPane.setBounds(25, 150, 1315, 500);
-        add(scrollPane);
+        JButton home = new JButton("Accueil");
+        home.addActionListener((event) -> HomeController.index());
+        home.setBounds(580, 665, 250, 25);
+        home.setFont(new Font("Arial", Font.BOLD, 15));
+        add(home);
     }
 }

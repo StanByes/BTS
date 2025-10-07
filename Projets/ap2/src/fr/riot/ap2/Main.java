@@ -1,6 +1,7 @@
 package fr.riot.ap2;
 
-import fr.riot.ap2.controllers.HomeController;
+import fr.riot.ap2.controllers.AccountController;
+import fr.riot.ap2.models.Model;
 import fr.riot.ap2.views.Window;
 
 import java.awt.*;
@@ -16,8 +17,11 @@ public class Main {
         // Initializers //
         window = new Window();
 
+        // First database load //
+        Model.load();
+
         // Open Home //
-        HomeController.index();
+        AccountController.index();
 
         // Make window visible //
         window.setVisible(true);

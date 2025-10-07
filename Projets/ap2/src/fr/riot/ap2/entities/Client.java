@@ -2,15 +2,18 @@ package fr.riot.ap2.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client {
     private final int id;
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
     private final Date birthday;
-    private final String email;
-    private final String phone;
+    private String email;
+    private String phone;
     private final Timestamp registeredAt;
+    private final List<Book> books = new ArrayList<>();
 
     public Client(int id, String firstName, String lastName, Date birthday, String email, String phone, Timestamp registeredAt) {
         this.id = id;
@@ -43,5 +46,21 @@ public class Client {
     }
     public Timestamp getRegisteredAt() {
         return registeredAt;
+    }
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -1,5 +1,6 @@
 package fr.riot.ap2.views;
 
+import fr.riot.ap2.controllers.AccountController;
 import fr.riot.ap2.controllers.BookController;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class HomeView extends JPanel {
 
         JButton account = new JButton("MON COMPTE");
         account.setFont(new Font("Arial", Font.PLAIN, 15));
+        account.addActionListener(e -> AccountController.index());
         account.setBounds(450, 255, 450, 65);
         add(account);
 

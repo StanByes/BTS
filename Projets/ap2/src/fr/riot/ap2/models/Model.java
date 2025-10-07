@@ -23,6 +23,22 @@ public class Model {
         return clients;
     }
 
+    public static Author getAuthorById(int id) {
+        for (Author author : Model.getAuthors())
+            if (author.getId() == id)
+                return author;
+
+        return null;
+    }
+
+    public static Client getClientById(int id) {
+        for (Client client : clients)
+            if (client.getId() == id)
+                return client;
+
+        return null;
+    }
+
     public static void load() {
         authors.clear();
         books.clear();

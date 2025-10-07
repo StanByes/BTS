@@ -18,34 +18,24 @@ public class BookModel extends BaseModel {
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(GET_BOOKS)) {
                 while (resultSet.next()) {
-                    Author author = null;
-                    for (Author searchAuthor : Model.getAuthors()) {
-                        if (searchAuthor.getId() == resultSet.getInt(4)) {
-                            author = searchAuthor;
-                            break;
-                        }
-                    }
-
+                    Author author = Model.getAuthorById(resultSet.getInt(4));
                     if (author == null) {
                         System.err.println("Book " + resultSet.getInt(1) + " has an unknown author");
                         continue;
                     }
 
-                    Client client = null;
-                    for (Client searchClient : Model.getClients()) {
-                        if (searchClient.getId() == resultSet.getInt(5)) {
-                            client = searchClient;
-                            break;
-                        }
-                    }
-
-                    books.add(new Book(
+                    Client client = Model.getClientById(resultSet.getInt(5));
+                    Book book = new Book(
                             resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
                             author,
                             client
-                    ));
+                    );
+                    books.add(book);
+
+                    if (client != null)
+                        client.getBooks().add(book);
                 }
             }
         }
