@@ -39,6 +39,14 @@ public class Model {
         return null;
     }
 
+    public static Book getBookByISBN(String ISBN) {
+        for (Book book : books)
+            if (book.getISBN().equalsIgnoreCase(ISBN))
+                return book;
+
+        return null;
+    }
+
     public static void load() {
         authors.clear();
         books.clear();

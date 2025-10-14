@@ -4,14 +4,13 @@ import fr.riot.ap2.entities.Author;
 import fr.riot.ap2.entities.Book;
 import fr.riot.ap2.entities.Client;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookModel extends BaseModel {
-    private static final String GET_BOOKS = "SELECT * FROM `books`";
+    private static final String GET_BOOKS = "SELECT `id`, `name`, `isbn`, `author_id`, `client_id`, `published_at` FROM `books`";
+    private static final String UPDATE_BOOK_CLIENT = "UPDATE `books` SET `client_id` = ? WHERE `id` = ?";
 
     public static List<Book> getBooks() throws SQLException {
         List<Book> books = new ArrayList<>();
@@ -30,7 +29,8 @@ public class BookModel extends BaseModel {
                             resultSet.getString(2),
                             resultSet.getString(3),
                             author,
-                            client
+                            client,
+                            resultSet.getDate(6)
                     );
                     books.add(book);
 
@@ -41,5 +41,14 @@ public class BookModel extends BaseModel {
         }
 
         return books;
+    }
+
+    public static boolean updateBookClient(Book book) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_CLIENT)) {
+            preparedStatement.setInt(1, book.getClient().getId());
+            preparedStatement.setInt(2, book.getId());
+
+            return preparedStatement.executeUpdate() == 1;
+        }
     }
 }

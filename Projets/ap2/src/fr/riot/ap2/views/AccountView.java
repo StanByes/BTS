@@ -84,7 +84,7 @@ public class AccountView extends JPanel {
 
         JLabel name = new JLabel("Nom :");
         name.setBounds(25, 25, 150, 25);
-        name.setFont(new Font("Arial", Font.BOLD, 25));
+        name.setFont(new Font("Arial", Font.PLAIN, 25));
         name.setHorizontalAlignment(SwingConstants.LEFT);
         clientPanel.add(name);
 
@@ -95,7 +95,7 @@ public class AccountView extends JPanel {
 
         JLabel firstName = new JLabel("Prénom :");
         firstName.setBounds(25, 75, 150, 25);
-        firstName.setFont(new Font("Arial", Font.BOLD, 25));
+        firstName.setFont(new Font("Arial", Font.PLAIN, 25));
         firstName.setHorizontalAlignment(SwingConstants.LEFT);
         clientPanel.add(firstName);
 
@@ -106,7 +106,7 @@ public class AccountView extends JPanel {
 
         JLabel email = new JLabel("Email :");
         email.setBounds(675, 25, 150, 25);
-        email.setFont(new Font("Arial", Font.BOLD, 25));
+        email.setFont(new Font("Arial", Font.PLAIN, 25));
         email.setHorizontalAlignment(SwingConstants.LEFT);
         clientPanel.add(email);
 
@@ -117,7 +117,7 @@ public class AccountView extends JPanel {
 
         JLabel phone = new JLabel("Téléphone :");
         phone.setBounds(675, 75, 150, 25);
-        phone.setFont(new Font("Arial", Font.BOLD, 25));
+        phone.setFont(new Font("Arial", Font.PLAIN, 25));
         phone.setHorizontalAlignment(SwingConstants.LEFT);
         clientPanel.add(phone);
 
