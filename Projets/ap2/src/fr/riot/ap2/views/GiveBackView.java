@@ -13,10 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-public class BorrowView extends JPanel {
+public class GiveBackView extends JPanel {
     private JPanel bookPanel = null;
 
-    public BorrowView() {
+    public GiveBackView() {
         UIManager.put("Button.disabledText", Color.WHITE);
 
         JLabel id = new JLabel("ISBN du livre :");
@@ -95,43 +95,63 @@ public class BorrowView extends JPanel {
         isbn.setHorizontalAlignment(SwingConstants.LEFT);
         bookPanel.add(isbn);
 
-        boolean alreadyBorrow = book.getClient() != null;
-        JButton borrow = new JButton(alreadyBorrow ? "Livre déjà emprunté" : "Emprunter");
-        borrow.setBounds(alreadyBorrow ? 435 : 505, 480, alreadyBorrow ? 300 : 150, 40);
-        borrow.setEnabled(!alreadyBorrow);
-        borrow.setBackground(alreadyBorrow ? new Color(255, 10, 0) : null);
-        borrow.setFont(new Font("Arial", Font.BOLD, 20));
+        boolean notBorrow = book.getClient() == null;
+        JButton giveBack = new JButton(notBorrow ? "Le livre n'est pas emprunté" : "Retourner");
+        giveBack.setBounds(notBorrow ? 425 : 505, 480, notBorrow ? 320 : 150, 40);
+        giveBack.setEnabled(!notBorrow);
+        giveBack.setBackground(notBorrow ? new Color(255, 10, 0) : null);
+        giveBack.setFont(new Font("Arial", Font.BOLD, 20));
 
-        if (!alreadyBorrow) {
-            BorrowView panel = this;
-            borrow.addActionListener((event) -> {
-                borrow.setBackground(Color.GRAY);
-                borrow.setEnabled(false);
+        if (!notBorrow) {
+            GiveBackView panel = this;
+            giveBack.addActionListener((event) -> {
+                giveBack.setEnabled(false);
+
                 new LoginPopup(new PopupValidation<Client>() {
                     @Override
                     public void validate(Client client) {
-                        book.setClient(client);
-                        try {
-                            BookModel.updateBookClient(book);
-                        } catch (SQLException exception) {
-                            // TODO : Add flash error
-                            throw new RuntimeException(exception);
-                        }
+                        if (book.getClient().getId() == client.getId()) {
+                            book.setClient(null);
+                            try {
+                                BookModel.updateBookClient(book);
+                            } catch (SQLException exception) {
+                                // TODO : Add flash error
+                                throw new RuntimeException(exception);
+                            }
 
-                        panel.setPanel(validationPanel());
+                            panel.setPanel(validationPanel());
+                        } else {
+                            panel.setPanel(notOwnerPanel());
+                        }
                     }
 
                     @Override
                     public void cancel() {
-                        borrow.setBackground(null);
-                        borrow.setEnabled(true);
+                        giveBack.setEnabled(true);
                     }
                 });
             });
         }
 
-        bookPanel.add(borrow);
+        bookPanel.add(giveBack);
         return bookPanel;
+    }
+
+    private JPanel notOwnerPanel() {
+        JPanel notOwner = new JPanel();
+        notOwner.setLayout(null);
+        notOwner.setBounds(125, 100, Main.getWindow().getWidth() - 240, Main.getWindow().getHeight() - 200);
+        notOwner.setBorder(BorderFactory.createDashedBorder(Color.BLACK));
+
+        JLabel text = new JLabel("Ce livre n'a pas été emprunté par cet adhérent");
+        text.setForeground(new Color(175, 0, 0));
+        text.setBounds(0, 0, notOwner.getWidth(), notOwner.getHeight());
+        text.setFont(new Font("Arial", Font.BOLD, 25));
+        text.setHorizontalAlignment(SwingConstants.CENTER);
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        notOwner.add(text);
+
+        return notOwner;
     }
 
     private JPanel validationPanel() {
@@ -140,7 +160,7 @@ public class BorrowView extends JPanel {
         validation.setBounds(125, 100, Main.getWindow().getWidth() - 240, Main.getWindow().getHeight() - 200);
         validation.setBorder(BorderFactory.createDashedBorder(Color.BLACK));
 
-        JLabel text = new JLabel("Livre emprunté avec succès");
+        JLabel text = new JLabel("Livre retourné avec succès");
         text.setForeground(new Color(0, 135, 0));
         text.setBounds(0, 0, validation.getWidth(), validation.getHeight());
         text.setFont(new Font("Arial", Font.BOLD, 25));

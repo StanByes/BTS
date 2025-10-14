@@ -43,12 +43,12 @@ public class BookModel extends BaseModel {
         return books;
     }
 
-    public static boolean updateBookClient(Book book) throws SQLException {
+    public static void updateBookClient(Book book) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_CLIENT)) {
-            preparedStatement.setInt(1, book.getClient().getId());
+            preparedStatement.setObject(1, book.getClient() != null ? book.getClient().getId() : null);
             preparedStatement.setInt(2, book.getId());
 
-            return preparedStatement.executeUpdate() == 1;
+            preparedStatement.executeUpdate();
         }
     }
 }

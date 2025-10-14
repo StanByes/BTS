@@ -22,11 +22,13 @@ public class HomeView extends JPanel {
 
         JButton borrow = new JButton("EMPRUNTER");
         borrow.setFont(new Font("Arial", Font.PLAIN, 15));
+        borrow.addActionListener(e -> BookController.borrow());
         borrow.setBounds(185, 365, 450, 65);
         add(borrow);
 
-        JButton giveBack = new JButton("RENDRE");
+        JButton giveBack = new JButton("RETOURNER");
         giveBack.setFont(new Font("Arial", Font.PLAIN, 15));
+        giveBack.addActionListener(e -> BookController.giveBack());
         giveBack.setBounds(715, 365, 450, 65);
         add(giveBack);
     }

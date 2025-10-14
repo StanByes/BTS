@@ -5,6 +5,7 @@ import fr.riot.ap2.entities.Book;
 import fr.riot.ap2.models.Model;
 import fr.riot.ap2.views.BooksView;
 import fr.riot.ap2.views.BorrowView;
+import fr.riot.ap2.views.GiveBackView;
 
 import java.util.List;
 
@@ -19,5 +20,10 @@ public class BookController {
     public static void borrow() {
         Model.load();
         Main.getWindow().linkView(new BorrowView());
+    }
+
+    public static void giveBack() {
+        Model.load();
+        Main.getWindow().linkView(new GiveBackView());
     }
 }

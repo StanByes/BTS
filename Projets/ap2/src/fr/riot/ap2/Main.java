@@ -1,6 +1,7 @@
 package fr.riot.ap2;
 
 import fr.riot.ap2.controllers.BookController;
+import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.models.Model;
 import fr.riot.ap2.views.Window;
 
@@ -27,7 +28,7 @@ public class Main {
         Model.load();
 
         // Open Home //
-        BookController.borrow();
+        HomeController.index();
 
         // Make window visible //
         window.setVisible(true);
