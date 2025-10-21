@@ -1,5 +1,7 @@
 package fr.riot.ap2;
 
+import fr.riot.ap2.classes.PopupValidation;
+import fr.riot.ap2.components.Scanner;
 import fr.riot.ap2.controllers.BookController;
 import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.models.Model;

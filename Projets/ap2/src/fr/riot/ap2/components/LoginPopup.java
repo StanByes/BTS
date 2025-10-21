@@ -10,8 +10,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class LoginPopup extends JFrame {
+    private final PopupValidation<Client> callback;
+
     public LoginPopup(PopupValidation<Client> callback) {
         super("Connexion");
+        this.callback = callback;
+
         setSize(800, 150);
         setLocation(300, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -34,32 +38,30 @@ public class LoginPopup extends JFrame {
         validation.addActionListener((event) -> {
             // Login
             String value = idField.getText();
-            if (value == null || value.isEmpty())
-                return;
-
-            int parsedValue;
-            try {
-                parsedValue = Integer.parseInt(value);
-            } catch (NumberFormatException exception) {
-                return;
-            }
-
-            Client client = Model.getClientById(parsedValue);
-            if (client == null) {
-                callback.cancel();
-                return;
-            }
-
-            callback.validate(client);
-            dispose();
+            handleLogin(value);
         });
         validation.setBounds(415, 47, 150, 25);
         panel.add(validation);
 
         JButton scan = new JButton("Scanner la carte d'adhérant");
         scan.setBounds(570, 47, 200, 25);
-        panel.add(scan);
+        scan.addActionListener(event -> {
+            validation.setEnabled(false);
 
+            new Scanner(new PopupValidation<String>() {
+                @Override
+                public void validate(String value) {
+                    handleLogin(value);
+                }
+
+                @Override
+                public void cancel() {
+                    validation.setEnabled(true);
+                }
+            });
+        });
+
+        panel.add(scan);
         getContentPane().add(panel);
 
         // Events //
@@ -71,5 +73,26 @@ public class LoginPopup extends JFrame {
                 callback.cancel();
             }
         });
+    }
+
+    private void handleLogin(String value) {
+        if (value == null || value.isEmpty())
+            return;
+
+        int parsedValue;
+        try {
+            parsedValue = Integer.parseInt(value);
+        } catch (NumberFormatException exception) {
+            return;
+        }
+
+        Client client = Model.getClientById(parsedValue);
+        if (client == null) {
+            callback.cancel();
+            return;
+        }
+
+        callback.validate(client);
+        dispose();
     }
 }

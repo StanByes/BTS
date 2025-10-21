@@ -3,6 +3,7 @@ package fr.riot.ap2.views;
 import fr.riot.ap2.Main;
 import fr.riot.ap2.classes.PopupValidation;
 import fr.riot.ap2.components.LoginPopup;
+import fr.riot.ap2.components.Scanner;
 import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.entities.Book;
 import fr.riot.ap2.entities.Client;
@@ -31,27 +32,40 @@ public class BorrowView extends JPanel {
         JButton validation = new JButton("Valider");
         validation.addActionListener((event) -> {
             // Search book
-            String value = idField.getText();
-            if (value == null || value.isEmpty())
-                return;
-
-            Book book = Model.getBookByISBN(value);
-            if (book != null) {
-                setPanel(createBookInformationPanel(book));
-            }
+            handleBook(idField.getText());
         });
         validation.setBounds(485, 62, 150, 25);
         add(validation);
-
-        JButton scan = new JButton("Scanner le livre");
-        scan.setBounds(1045, 62, 220, 25);
-        add(scan);
 
         JButton home = new JButton("Accueil");
         home.addActionListener((event) -> HomeController.index());
         home.setBounds(580, 665, 250, 25);
         home.setFont(new Font("Arial", Font.BOLD, 15));
         add(home);
+
+        JButton scan = new JButton("Scanner le livre");
+        scan.setBounds(1045, 62, 220, 25);
+        scan.addActionListener(event -> {
+            home.setEnabled(false);
+            validation.setEnabled(false);
+
+            new Scanner(new PopupValidation<String>() {
+                @Override
+                public void validate(String value) {
+                    home.setEnabled(true);
+                    validation.setEnabled(true);
+
+                    handleBook(value);
+                }
+
+                @Override
+                public void cancel() {
+                    home.setEnabled(true);
+                    validation.setEnabled(true);
+                }
+            });
+        });
+        add(scan);
     }
 
     public void setPanel(JPanel panel) {
@@ -63,6 +77,16 @@ public class BorrowView extends JPanel {
 
         validate();
         repaint();
+    }
+
+    private void handleBook(String value) {
+        if (value == null || value.isEmpty())
+            return;
+
+        Book book = Model.getBookByISBN(value);
+        if (book != null) {
+            setPanel(createBookInformationPanel(book));
+        }
     }
 
     private JPanel createBookInformationPanel(Book book) {

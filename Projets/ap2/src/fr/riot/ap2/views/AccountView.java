@@ -1,7 +1,9 @@
 package fr.riot.ap2.views;
 
 import fr.riot.ap2.Main;
+import fr.riot.ap2.classes.PopupValidation;
 import fr.riot.ap2.components.BookList;
+import fr.riot.ap2.components.Scanner;
 import fr.riot.ap2.controllers.HomeController;
 import fr.riot.ap2.entities.Client;
 import fr.riot.ap2.models.ClientModel;
@@ -12,6 +14,10 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class AccountView extends JPanel {
+    private final JTextField idField;
+    private final JButton scan;
+    private final JButton validation;
+
     private Client client = null;
     private JPanel accountPanel = null;
 
@@ -21,16 +27,19 @@ public class AccountView extends JPanel {
         id.setBounds(125, 60, 165, 25);
         add(id);
 
-        JTextField idField = new JTextField();
+        this.idField = new JTextField();
         idField.setBounds(265, 62, 250, 25);
         add(idField);
 
-        JButton validation = new JButton("Connexion");
+        this.scan = new JButton("Scanner la carte d'adhérant");
+        this.validation = new JButton("Connexion");
         validation.addActionListener((event) -> {
             if (client != null) {
                 // Logout
-                remove(accountPanel);
                 idField.setEnabled(true);
+                scan.setEnabled(true);
+
+                remove(accountPanel);
                 validation.setText("Connexion");
                 validate();
                 repaint();
@@ -41,39 +50,63 @@ public class AccountView extends JPanel {
 
             // Login
             String value = idField.getText();
-            if (value == null || value.isEmpty())
-                return;
-
-            int parsedValue;
-            try {
-                parsedValue = Integer.parseInt(value);
-            } catch (NumberFormatException exception) {
-                return;
-            }
-
-            client = Model.getClientById(parsedValue);
-            if (client != null) {
-                idField.setEnabled(false);
-                validation.setText("Déconnexion");
-
-                accountPanel = createAccountInformationPanel(client);
-                add(accountPanel);
-                validate();
-                repaint();
-            }
+            handleLogin(value);
         });
         validation.setBounds(520, 62, 150, 25);
         add(validation);
-
-        JButton scan = new JButton("Scanner la carte d'adhérant");
-        scan.setBounds(1045, 62, 220, 25);
-        add(scan);
 
         JButton home = new JButton("Accueil");
         home.addActionListener((event) -> HomeController.index());
         home.setBounds(580, 665, 250, 25);
         home.setFont(new Font("Arial", Font.BOLD, 15));
         add(home);
+
+        scan.setBounds(1045, 62, 220, 25);
+        scan.addActionListener(event -> {
+            home.setEnabled(false);
+            validation.setEnabled(false);
+
+            new Scanner(new PopupValidation<String>() {
+                @Override
+                public void validate(String value) {
+                    home.setEnabled(true);
+                    validation.setEnabled(true);
+
+                    handleLogin(value);
+                }
+
+                @Override
+                public void cancel() {
+                    home.setEnabled(true);
+                    validation.setEnabled(true);
+                }
+            });
+        });
+        add(scan);
+    }
+
+    private void handleLogin(String value) {
+        if (value == null || value.isEmpty())
+            return;
+
+        int parsedValue;
+        try {
+            parsedValue = Integer.parseInt(value);
+        } catch (NumberFormatException exception) {
+            return;
+        }
+
+        client = Model.getClientById(parsedValue);
+        if (client != null) {
+            idField.setEnabled(false);
+            scan.setEnabled(false);
+            validation.setText("Déconnexion");
+
+            accountPanel = createAccountInformationPanel(client);
+            add(accountPanel);
+            validate();
+            repaint();
+        }
     }
 
     private JPanel createAccountInformationPanel(Client client) {
