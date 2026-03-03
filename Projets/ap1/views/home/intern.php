@@ -19,17 +19,29 @@
         <form method="post" action="?action=create_report">
             <div class="form-group mb-3">
                 <label class="form-label" for="title">Titre :</label>
-                <input type="text" class="form-control" name="title" id="title">
+                <input type="text" class="form-control" name="title" id="title" required>
             </div>
 
             <div class="form-group mb-3">
                 <label class="form-label" for="content">Contenu :</label>
-                <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                <textarea class="form-control" name="content" id="content" required rows="3"></textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label" for="note">Note (optionnel) :</label>
+                <select class="form-select" name="note" id="note">
+                    <option <?= $report->getNote() == null ? "selected" : "" ?> value="">Non noté</option>
+                    <?php
+                    for ($i = 0; $i < 6; $i++) { ?>
+                        <option <?= $report->getNote() === $i ? "selected" : "" ?> value="<?= $i ?>"><?= $i ?></option>
+                    <?php }
+                    ?>
+                </select>
             </div>
 
             <div class="form-group mb-3">
                 <label class="form-label" for="date">Date :</label>
-                <input class="form-control" name="date" id="date" type="date">
+                <input class="form-control" name="date" id="date" type="date" required>
             </div>
 
             <div class="d-flex justify-content-center mb-4">

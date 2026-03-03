@@ -10,15 +10,17 @@ class Report
     private User $creator;
     private string $title;
     private string $content;
+    private int | null $note;
     private DateTime $date;
     private DateTime $createdAt;
 
-    public function __construct($id, $creator, $title, $content, $date, $createdAt)
+    public function __construct($id, $creator, $title, $content, $note, $date, $createdAt)
     {
         $this->id = $id;
         $this->creator = $creator;
         $this->title = $title;
         $this->content = $content;
+        $this->note = $note;
         $this->date = $date;
         $this->createdAt = $createdAt;
     }
@@ -43,6 +45,11 @@ class Report
         return $this->content;
     }
 
+    public function getNote(): int | null
+    {
+        return $this->note;
+    }
+
     public function getDate(): DateTime
     {
         return $this->date;
@@ -61,6 +68,11 @@ class Report
     public function setContent($content): void
     {
         $this->content = $content;
+    }
+
+    public function setNote($note): void
+    {
+        $this->note = $note;
     }
 
     public function setDate($date): void

@@ -9,7 +9,7 @@ use http\Exception\RuntimeException;
 
 class ReportModel extends BaseModel
 {
-    private static array $atr = ["id", "creator_id", "title", "content", "date", "created_at"];
+    private static array $atr = ["id", "creator_id", "title", "content", "note", "date", "created_at"];
 
     public static function getReportsCount($user = null): int
     {
@@ -57,32 +57,35 @@ class ReportModel extends BaseModel
 
     public static function createReport($report): bool
     {
-        $atr = ["creator_id", "title", "content", "date", "created_at"];
-        $q = "INSERT INTO `reports`(" . self::map($atr) . ") VALUES (?,?,?,?,NOW())";
+        $atr = ["creator_id", "title", "content", "note", "date", "created_at"];
+        $q = "INSERT INTO `reports`(" . self::map($atr) . ") VALUES (?,?,?,?,?,NOW())";
 
         $prepare = self::getConnection()->prepare($q);
         $prepare->bindParam(1, $report->getCreator()->getId());
         $prepare->bindParam(2, $report->getTitle());
         $prepare->bindParam(3, $report->getContent());
-        $prepare->bindParam(4, $report->getDate()->format("Y-m-d"));
+        $prepare->bindParam(4, $report->getNote());
+        $prepare->bindParam(5, $report->getDate()->format("Y-m-d"));
 
         return $prepare->execute();
     }
 
     public static function updateReport($report): bool
     {
-        $q = "UPDATE `reports` SET `title` = ?, `content` = ?, `date` = ? WHERE `id` = ?";
+        $q = "UPDATE `reports` SET `title` = ?, `content` = ?, `note` = ?, `date` = ? WHERE `id` = ?";
         $prepare = self::getConnection()->prepare($q);
 
         $title = $report->getTitle();
         $content = $report->getContent();
+        $note = $report->getNote();
         $date = $report->getDate()->format("Y-m-d");
         $id = $report->getId();
 
         $prepare->bindParam(1, $title);
         $prepare->bindParam(2, $content);
-        $prepare->bindParam(3, $date);
-        $prepare->bindParam(4, $id);
+        $prepare->bindParam(3, $note);
+        $prepare->bindParam(4, $date);
+        $prepare->bindParam(5, $id);
 
         return $prepare->execute();
     }
@@ -97,6 +100,7 @@ class ReportModel extends BaseModel
             UserModel::getUserById($data["creator_id"]),
             $data["title"],
             $data["content"],
+            $data["note"],
             DateTime::createFromFormat("Y-m-d", $data["date"]),
             new DateTime($data["created_at"])
         );

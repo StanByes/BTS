@@ -12,7 +12,8 @@ class ReportController extends AppController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $title = strip_tags($_POST["title"]);
-            $content = strip_tags($_POST['content']);
+            $content = strip_tags($_POST["content"]);
+            $note = !empty($_POST["note"]) ? strip_tags($_POST["note"]) : null;
             $date = strip_tags($_POST["date"]);
 
             if (empty($title) || empty($content) || empty($date)) {
@@ -22,7 +23,7 @@ class ReportController extends AppController
             }
 
             $date = DateTime::createFromFormat("Y-m-d", $date);
-            $report = new Report(null, self::getUser(), $title, $content, $date, new DateTime());
+            $report = new Report(null, self::getUser(), $title, $content, $note, $date, new DateTime());
             ReportModel::createReport($report);
             self::flash(false, "Rapport créé avec succès");
 
@@ -69,6 +70,7 @@ class ReportController extends AppController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $title = strip_tags($_POST["title"]);
             $content = strip_tags($_POST['content']);
+            $note = !empty($_POST["note"]) ? strip_tags($_POST["note"]) : null;
             $date = strip_tags($_POST["date"]);
 
             if (empty($title) || empty($content) || empty($date)) {
@@ -80,6 +82,7 @@ class ReportController extends AppController
             $date = DateTime::createFromFormat("Y-m-d", $date);
             $report->setTitle($title);
             $report->setContent($content);
+            $report->setNote($note);
             $report->setDate($date);
 
             if (!ReportModel::updateReport($report)) {
