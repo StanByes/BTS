@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.riot.ap.controller.AuthLoginController">
+   <children>
+      <Label fx:id="flash" layoutX="241.0" layoutY="70.0" />
+      <Label layoutX="219.0" layoutY="119.0" text="Nom d'utilisateur :" />
+      <TextField fx:id="username" layoutX="219.0" layoutY="139.0" />
+      <Label layoutX="217.0" layoutY="186.0" text="Mot de passe :" />
+      <PasswordField fx:id="password" layoutX="216.0" layoutY="204.0" />
+      <Label layoutX="236.0" layoutY="15.0" text="Connexion">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="256.0" layoutY="347.0" mnemonicParsing="false" onAction="#onSubmit" text="Valider" textFill="#00ab0b">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -11,7 +11,7 @@ public class ConnectionFactory {
 
     public static Connection get() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DB, USER, PWD);
         } catch (ClassNotFoundException | SQLException exception) {
             System.err.println("Une erreur est survenue lors de la connexion à la base de données :");

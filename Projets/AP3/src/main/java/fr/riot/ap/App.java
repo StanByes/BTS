@@ -1,5 +1,6 @@
 package fr.riot.ap;
 
+import fr.riot.ap.model.Agent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +13,28 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-
     private static Scene scene;
+    private static App instance;
+
+    public static App getInstance() {
+        return instance;
+    }
+
+    private Agent agent = null;
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("home"), 640, 480);
+        instance = this;
+
+        scene = new Scene(loadFXML("auth/login"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

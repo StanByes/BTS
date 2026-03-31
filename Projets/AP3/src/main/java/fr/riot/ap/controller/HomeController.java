@@ -1,7 +1,10 @@
 package fr.riot.ap.controller;
 
 import fr.riot.ap.App;
+import fr.riot.ap.model.AgentDAO;
 import javafx.fxml.FXML;
+
+import java.sql.SQLException;
 
 public class HomeController {
     @FXML
@@ -22,5 +25,10 @@ public class HomeController {
     @FXML
     public void showClients() {
         App.setRoot("clients/index");
+    }
+
+    @FXML
+    public void showAuthEditPassword() {
+        App.setRoot("auth/edit_password");
     }
 }
