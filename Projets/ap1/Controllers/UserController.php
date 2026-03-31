@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Entities\Role;
 use App\Entities\User;
+use App\Entities\FrontDesign;
 use App\Models\InternshipModel;
 use App\Models\ResetPasswordQueryModel;
 use App\Models\RoleModel;
@@ -199,33 +200,50 @@ Voici un lien de réinitialisation unique, valable 1 heure : " . $url;
 
     public static function update(): void
     {
-        $surname = strip_tags($_POST['surname']);
-        $firstname = strip_tags($_POST['firstname']);
-        $mail = strip_tags($_POST['mail']);
+	$frontDesign = isset($_POST['front_design']);
 
-        $internshipStartAt = strip_tags($_POST["start_at"]);
-        $internshipEndAt = strip_tags($_POST["end_at"]);
+	if (self::getUser()->getFrontDesign() == FrontDesign::STANDARD) {
+	    if ($frontDesign) {
+		UserModel::updateUserFrontDesign(self::getUser(), FrontDesign::DARK);
+		self::updateUserFrontDesign(FrontDesign::DARK);
+            }	
+	} else {
+	    if (!$frontDesign) {
+	        UserModel::updateUserFrontDesign(self::getUser(), FrontDesign::STANDARD);
+		self::updateUserFrontDesign(FrontDesign::STANDARD);
+	    }
+	}
 
-        if (empty($surname) || empty($firstname) || empty($mail)
-            || empty($internshipStartAt) || empty($internshipEndAt)) {
-            self::flash(true, "Veuillez remplir tous les champs obligatoires");
-            header("Location: ./");
-            die();
-        }
+	if (self::getUser()->getRole()->getName() == 'intern') {
+		$surname = strip_tags($_POST['surname']);
+		$firstname = strip_tags($_POST['firstname']);
+		$mail = strip_tags($_POST['mail']);
 
-        $internshipDayStartAt = $_POST["day_start_at"] ?? null;
-        $internshipDayEndAt = $_POST["day_end_at"] ?? null;
+		$internshipStartAt = strip_tags($_POST["start_at"]);
+		$internshipEndAt = strip_tags($_POST["end_at"]);
 
-        UserModel::updateUser(self::getUser(), $surname, $firstname, $mail);
-        InternshipModel::updateInternship(
-            self::getUser(),
-            $internshipStartAt,
-            $internshipEndAt,
-            $internshipDayStartAt,
-            $internshipDayEndAt
-        );
+		if (empty($surname) || empty($firstname) || empty($mail)
+		    || empty($internshipStartAt) || empty($internshipEndAt)) {
+		    self::flash(true, "Veuillez remplir tous les champs obligatoires");
+		    header("Location: ./");
+		    die();
+		}
 
-        self::flash(false, "Profil mis à jour avec succès");
+		$internshipDayStartAt = $_POST["day_start_at"] ?? null;
+		$internshipDayEndAt = $_POST["day_end_at"] ?? null;
+
+		UserModel::updateUser(self::getUser(), $surname, $firstname, $mail);
+		InternshipModel::updateInternship(
+		    self::getUser(),
+		    $internshipStartAt,
+		    $internshipEndAt,
+		    $internshipDayStartAt,
+		    $internshipDayEndAt
+		);
+	}
+
+	self::flash(false, "Profil mis à jour avec succès");
+
         header("Location: ./");
         die();
     }

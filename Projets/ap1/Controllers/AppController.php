@@ -11,6 +11,15 @@ abstract class AppController
         return unserialize($_SESSION["user"]);
     }
 
+    protected static function updateUserFrontDesign($frontDesign): void
+    {
+	$user = self::getUser();
+	$user->setFrontDesign($frontDesign);
+
+	echo "HERE";
+	$_SESSION['user'] = serialize($user);
+    }
+
     protected static function sendMail($to, $subject, $content)
     {
         $report = "reports@internship.fr";

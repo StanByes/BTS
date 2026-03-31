@@ -1,3 +1,7 @@
+<?php
+use App\Entities\FrontDesign;
+?>
+
 <ul class="d-flex justify-content-around nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" data-bs-toggle="tab" href="#reports">Mes Rapports</a>
@@ -70,6 +74,11 @@
                     <input type="email" class="form-control" name="mail" id="mail" required="required"
                            value="<?= $user->getMail() ?>">
                 </div>
+
+		<div class="form-check form-switch col-6 mb-3">
+		    <input class="form-check-input" type="checkbox" role="switch" name="front_design" id="switchFrontDesign" <?= $user->getFrontDesign() == FrontDesign::DARK ? 'checked' : '' ?>/>
+  		    <label class="form-check-label" for="switchFrontDesign">Mode sombre</label>
+		</div>
             </div>
 
             <?php

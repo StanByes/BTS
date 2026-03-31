@@ -2,10 +2,11 @@
 namespace App\Models;
 
 use App\Entities\User;
+use App\Entities\FrontDesign;
 
 class UserModel extends BaseModel
 {
-    private static array $atr = ["id", "firstname", "surname", "login", "mail", "password", "status", "role_id"];
+    private static array $atr = ["id", "firstname", "surname", "login", "mail", "password", "status", "role_id", "front_design"];
 
     public static function getAllUsers(): array
     {
@@ -66,6 +67,19 @@ class UserModel extends BaseModel
         return $prepare->execute();
     }
 
+    public static function updateUserFrontDesign($user, $frontDesign): bool
+    {
+	$q = "UPDATE `users` SET `front_design` = ? WHERE `id` = ?";
+	$prepare = self::getConnection()->prepare($q);
+	$frontDesignValue = $frontDesign->value;
+	$prepare->bindParam(1, $frontDesignValue);
+
+	$userId = $user->getId();
+	$prepare->bindParam(2, $userId);
+
+	return $prepare->execute();
+    }
+
     public static function getWithoutReportBySupervisor($supervisor): array
     {
         $q = "SELECT `users`.* FROM `users`, `internships`
@@ -108,7 +122,8 @@ class UserModel extends BaseModel
             $data["mail"],
             $data["password"],
             $data["status"],
-            RoleModel::getRoleById($data["role_id"])
+	    RoleModel::getRoleById($data["role_id"]),
+	    FrontDesign::from($data["front_design"])
         );
     }
 
