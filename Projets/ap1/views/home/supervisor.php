@@ -1,16 +1,9 @@
-<?php
-use App\Entities\FrontDesign;
-?>
-
 <ul class="d-flex justify-content-around nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" data-bs-toggle="tab" href="#reports">Rapports des stagiaires</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#interns">Liste de vos stagiaires</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#profil">Modifier mon profil</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#create">Liste de vos stagiaires</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#stats">Statistiques</a>
@@ -31,7 +24,7 @@ use App\Entities\FrontDesign;
         <?php include VIEW_PATH . DS . "partials/reports_list.php" ?>
     </div>
 
-    <div class="tab-pane container fade" id="interns">
+    <div class="tab-pane container fade" id="create">
         <?php
         foreach ($internships as $internship) {
             $intern = $internship->getIntern();
@@ -74,21 +67,6 @@ use App\Entities\FrontDesign;
                 </div>
             </div>
         <?php } ?>
-    </div>
-
-    <div class="tab-pane container fade" id="profil">
-        <form method="post" action="?action=edit_user">
-	    <div class="row">
-		<div class="form-check form-switch col-6 mb-3">
-		    <input class="form-check-input" type="checkbox" role="switch" name="front_design" id="switchFrontDesign" <?= $user->getFrontDesign() == FrontDesign::DARK ? 'checked' : '' ?>/>
-  		    <label class="form-check-label" for="switchFrontDesign">Mode sombre</label>
-		</div>
-	    </div>
-
-            <div class="d-flex justify-content-center mt-4">
-                <button class="btn btn-success w-75">Valider</button>
-             </div>
-        </form>
     </div>
 
     <div class="tab-pane container fade" id="stats">

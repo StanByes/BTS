@@ -1,7 +1,3 @@
-<?php
-use App\Entities\FrontDesign;
-?>
-
 <html lang="fr">
     <head>
         <title><?= $title ?></title>
@@ -10,7 +6,7 @@ use App\Entities\FrontDesign;
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <body class="<?= isset($_SESSION['user']) && $user->getFrontDesign() == FrontDesign::DARK ? 'bg-dark' : '' ?>">
+    <body>
         <header>
             <?php
             if (isset($_SESSION["user"])) {?>

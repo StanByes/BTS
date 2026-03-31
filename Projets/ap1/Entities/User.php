@@ -2,11 +2,6 @@
 
 namespace App\Entities;
 
-enum FrontDesign: string {
-    case STANDARD = "STANDARD";
-    case DARK = "DARK";
-}
-
 class User
 {
     private int $id;
@@ -17,9 +12,8 @@ class User
     private string $password;
     private bool $status;
     private Role $role;
-    private FrontDesign $frontDesign;
 
-    public function __construct($id, $firstname, $surname, $login, $mail, $password, $status, $role, $frontDesign)
+    public function __construct($id, $firstname, $surname, $login, $mail, $password, $status, $role)
     {
         $this->id = $id;
         $this->firstname = $firstname;
@@ -28,8 +22,7 @@ class User
         $this->mail = $mail;
         $this->password = $password;
         $this->status = $status;
-	$this->role = $role;
-	$this->frontDesign = $frontDesign;
+        $this->role = $role;
     }
 
     public function getId(): int
@@ -75,15 +68,5 @@ class User
     public function isActive(): bool
     {
         return $this->status == 1;
-    }
-
-    public function getFrontDesign(): FrontDesign
-    {
-	return $this->frontDesign;
-    }
-
-    public function setFrontDesign($frontDesign): void
-    {
-	$this->frontDesign = $frontDesign;
     }
 }
